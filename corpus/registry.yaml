@@ -1,9 +1,6 @@
 - title: "Measuring what Matters: Construct Validity in Large Language Model Benchmarks"
   url: https://arxiv.org/abs/2511.04703
 
-- title: "Position: Evaluating Generative AI Systems Is a Social Science Measurement Challenge"
-  url: https://arxiv.org/abs/2502.00561
-
 - title: "Large Language Model Psychometrics: A Systematic Review of Evaluation, Validation, and Enhancement"
   url: https://arxiv.org/abs/2505.08245
 
@@ -13,5 +10,8 @@
 - title: "Apparent Psychological Profiles of Large Language Models are Largely a Measurement Artifact"
   url: https://arxiv.org/abs/2606.20205
 
-- 
-  
+- title: "What Is It for a Machine Learning Model to Have a Capability?"
+  url: https://arxiv.org/abs/2405.08989
+
+- title: "Measuring What AI Systems Might Do: Towards A Measurement Science in AI"
+  url: https://arxiv.org/abs/2603.00063
