@@ -1,17 +1,47 @@
 - title: "Measuring what Matters: Construct Validity in Large Language Model Benchmarks"
   url: https://arxiv.org/abs/2511.04703
+  published: 2025-11-03
 
 - title: "Large Language Model Psychometrics: A Systematic Review of Evaluation, Validation, and Enhancement"
   url: https://arxiv.org/abs/2505.08245
+  published: 2025-05-13
 
 - title: "Position: Evaluating Generative AI Systems Is a Social Science Measurement Challenge"
   url: https://arxiv.org/abs/2502.00561
+  published: 2025-02-01
 
 - title: "Apparent Psychological Profiles of Large Language Models are Largely a Measurement Artifact"
   url: https://arxiv.org/abs/2606.20205
+  published: 2026-06-18
 
 - title: "What Is It for a Machine Learning Model to Have a Capability?"
   url: https://arxiv.org/abs/2405.08989
+  published: 2024-05-14
 
 - title: "Measuring What AI Systems Might Do: Towards A Measurement Science in AI"
   url: https://arxiv.org/abs/2603.00063
+  published: 2026-02-10
+
+- title: "Item Response Theory for AI Safety"
+  url: https://arxiv.org/abs/2608.05086
+  published: 2026-08-05
+
+- title: "metabench: A Sparse Benchmark of Reasoning and Knowledge in Large Language Models"
+  url: https://arxiv.org/abs/2407.12844
+  published: 2024-07-04
+
+- title: "Capabilities Ain't All You Need: Measuring Propensities in AI"
+  url: https://arxiv.org/abs/2602.18182
+  published: 2026-02-20
+
+- title: "General Scales Unlock AI Evaluation with Explanatory and Predictive Power"
+  url: https://arxiv.org/abs/2503.06378
+  published: 2025-03-09
+
+- title: "Do Large Language Model Benchmarks Test Reliability?"
+  url: https://arxiv.org/abs/2502.03461
+  published: 2025-02-05
+
+- title: "When Judgment Becomes Noise: How Design Failures in LLM Judge Benchmarks Silently Undermine Validity"
+  url: https://arxiv.org/abs/2509.20293
+  published: 2025-09-24
