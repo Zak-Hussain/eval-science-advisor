@@ -2,6 +2,7 @@ from pathlib import Path
 import re
 import urllib.request
 import yaml
+from datetime import date
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -53,11 +54,18 @@ def fetch_arxiv_paper(url: str, out_dir: Path) -> dict:
 # Load the registry 
 entries = yaml.safe_load((ROOT / "sources" / "registry.yaml").read_text())
 
-# Loop through entries, identify arxiv articles, and fetch
+# Loop through entries, identify arxiv articles, fetch and save
+manifest = {}
 for entry in entries:
 
     if "arxiv.org" in entry['url']:
-        print(fetch_arxiv_paper(entry['url'], ROOT / "sources" / "pdfs"))
+        result = fetch_arxiv_paper(entry['url'], ROOT / "sources" / "pdfs")
+        manifest[entry['id']] = {
+            "arxiv_id": result["arxiv_id"],
+            "version": result["version"],
+            "pdf_path": str(result["pdf_path"].relative_to(ROOT)),
+            "fetched": date.today(),
+        }
 
 
 
