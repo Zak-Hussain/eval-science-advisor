@@ -19,7 +19,6 @@
   url: https://arxiv.org/abs/2502.00561
   published: 2025-02-01
   categories: [constructs, validity]
-  status: todo
   # ICML 2025 acceptance not confirmed (arXiv page lists no venue)
 
 - id: voudouris2026measuring
@@ -28,7 +27,6 @@
   url: https://arxiv.org/abs/2603.00063
   published: 2026-02-10
   categories: [constructs, measurement-models, elicitation, generalization]
-  status: todo
 
 - id: harding2024capability
   title: "What Is It for a Machine Learning Model to Have a Capability?"
@@ -36,7 +34,6 @@
   url: https://arxiv.org/abs/2405.08989
   published: 2024-05-14
   categories: [constructs, elicitation]
-  status: todo
   # forthcoming in British Journal for the Philosophy of Science (per arXiv page)
 
 - id: raji2021everything
@@ -45,7 +42,6 @@
   url: https://arxiv.org/abs/2111.15366
   published: 2021
   categories: [constructs, validity]
-  status: todo
   # venue (NeurIPS 2021 Datasets & Benchmarks) not verified
 
 # --- validity ------------------------------------------------------------------
@@ -56,7 +52,6 @@
   url: https://doi.org/10.1037/0003-066X.50.9.741
   published: 1995
   categories: [validity, constructs]
-  status: todo
   # American Psychologist 50(9):741-749
 
 - id: kane2013validating
@@ -65,7 +60,6 @@
   url: https://doi.org/10.1111/jedm.12000
   published: 2013
   categories: [validity, generalization]
-  status: todo
   # Journal of Educational Measurement 50(1):1-73. 73 pages; excerpts (roughly sections 1-5) suffice
 
 - id: salaudeen2025measurement
@@ -74,7 +68,6 @@
   url: https://arxiv.org/abs/2505.10573
   published: 2025-05-13
   categories: [validity, constructs]
-  status: todo
   # NeurIPS 2025 venue seen only in search results, not confirmed
 
 - id: bean2025measuring
@@ -83,7 +76,6 @@
   url: https://arxiv.org/abs/2511.04703
   published: 2025-11-03
   categories: [validity, constructs, scoring]
-  status: noted
 
 - id: xu2024contamination
   title: "Benchmark Data Contamination of Large Language Models: A Survey"
@@ -91,7 +83,6 @@
   url: https://arxiv.org/abs/2406.04244
   published: 2024-06-06
   categories: [validity]
-  status: todo
   # no newer (2025-2026) contamination survey was checked; may be superseded
 
 # --- elicitation ---------------------------------------------------------------
@@ -102,7 +93,6 @@
   url: https://www.apolloresearch.ai/science/we-need-a-science-of-evals
   published: 2024-01-22
   categories: [elicitation, validity]
-  status: todo
   # cross-cutting framing piece; blog post, not peer-reviewed
 
 - id: hagendorff2026machine
@@ -111,7 +101,6 @@
   url: https://doi.org/10.1126/sciadv.aec1912
   published: 2026-10-28
   categories: [elicitation, constructs, validity]
-  status: todo
   # Science Advances 12(44):eaec1912 (online 2026-10-28; issue 2026-10-30). Earlier version: arXiv:2303.13988 ("Machine Psychology")
 
 - id: greenblatt2024password
@@ -120,7 +109,6 @@
   url: https://arxiv.org/abs/2405.19550
   published: 2024-05-29
   categories: [elicitation]
-  status: todo
 
 - id: metr2024elicitation
   title: "Guidelines for capability elicitation"
@@ -128,7 +116,6 @@
   url: https://metr.org/blog/2024-03-15-guidelines-for-capability-elicitation/
   published: 2024-03-15
   categories: [elicitation]
-  status: todo
   # practitioner guidance; a newer METR revision (2025-2026) was not checked
 
 - id: needham2025awareness
@@ -137,7 +124,6 @@
   url: https://arxiv.org/abs/2505.23836
   published: 2025-05-28
   categories: [elicitation, validity]
-  status: todo
 
 # --- scoring -------------------------------------------------------------------
 
@@ -147,7 +133,6 @@
   url: https://arxiv.org/abs/2306.05685
   published: 2023-06-09
   categories: [scoring]
-  status: todo
   # NeurIPS 2023 Datasets & Benchmarks
 
 - id: schaeffer2023mirage
@@ -156,7 +141,6 @@
   url: https://arxiv.org/abs/2304.15004
   published: 2023-04-28
   categories: [scoring, constructs, generalization]
-  status: todo
   # NeurIPS 2023
 
 - id: guerdan2025indeterminacy
@@ -165,7 +149,6 @@
   url: https://arxiv.org/abs/2503.05965
   published: 2025-03-07
   categories: [scoring, validity, reliability]
-  status: todo
   # NeurIPS 2025
 
 - id: plank2022variation
@@ -174,7 +157,6 @@
   url: https://arxiv.org/abs/2211.02570
   published: 2022-11-04
   categories: [scoring, reliability]
-  status: todo
   # EMNLP 2022 main (2022.emnlp-main.731)
 
 # --- reliability ---------------------------------------------------------------
@@ -185,7 +167,6 @@
   url: https://arxiv.org/abs/2310.11324
   published: 2023-10-17
   categories: [reliability, elicitation]
-  status: todo
   # ICLR 2024 (per arXiv comments field)
 
 - id: heineman2025signal
@@ -194,7 +175,6 @@
   url: https://arxiv.org/abs/2508.13144
   published: 2025-08-18
   categories: [reliability, measurement-models, generalization]
-  status: todo
   # NeurIPS 2025 poster (per conference listing)
 
 - id: northcutt2021labelerrors
@@ -203,7 +183,6 @@
   url: https://arxiv.org/abs/2103.14749
   published: 2021
   categories: [reliability, validity]
-  status: todo
   # NeurIPS 2021 Datasets & Benchmarks
 
 - id: meyer2026profiles
@@ -212,7 +191,6 @@
   url: https://arxiv.org/abs/2606.20205
   published: 2026-06-18
   categories: [reliability, validity, constructs]
-  status: todo
 
 # --- measurement-models --------------------------------------------------------
 
@@ -222,7 +200,6 @@
   url: https://doi.org/10.18653/v1/2021.acl-long.346
   published: 2021
   categories: [measurement-models, reliability]
-  status: todo
   # ACL-IJCNLP 2021
 
 - id: maiapolo2024tinybenchmarks
@@ -231,7 +208,6 @@
   url: https://arxiv.org/abs/2402.14992
   published: 2024
   categories: [measurement-models, reliability]
-  status: todo
   # venue (ICML 2024) not verified
 
 - id: burnell2023structure
@@ -240,7 +216,6 @@
   url: https://arxiv.org/abs/2306.10062
   published: 2023
   categories: [measurement-models, constructs]
-  status: todo
   # venue not verified
 
 - id: zhou2025generalscales
@@ -249,7 +224,6 @@
   url: https://arxiv.org/abs/2503.06378
   published: 2025-03-09
   categories: [measurement-models, generalization, constructs]
-  status: todo
 
 # --- generalization ------------------------------------------------------------
 
@@ -259,7 +233,6 @@
   url: https://arxiv.org/abs/2411.00640
   published: 2024-11-01
   categories: [generalization, reliability]
-  status: todo
 
 - id: burnell2023reporting
   title: "Rethink reporting of evaluation results in AI"
@@ -267,7 +240,6 @@
   url: https://doi.org/10.1126/science.adf6369
   published: 2023-04-14
   categories: [generalization, constructs, validity]
-  status: todo
   # Science 380(6641):136-138
 
 - id: ruan2024observational
@@ -276,7 +248,6 @@
   url: https://arxiv.org/abs/2405.10938
   published: 2024-05-17
   categories: [generalization, measurement-models]
-  status: todo
   # NeurIPS 2024 (per conference listing; arXiv page shows no venue)
 
 - id: liao2021learning
@@ -285,7 +256,6 @@
   url: https://datasets-benchmarks-proceedings.neurips.cc/paper/2021/hash/757b505cfd34c64c85ca5b5690ee5293-Abstract-round2.html
   published: 2021
   categories: [generalization, validity]
-  status: todo
   # NeurIPS 2021 Datasets & Benchmarks
 
 - id: bowyer2025clt
@@ -294,5 +264,4 @@
   url: https://arxiv.org/abs/2503.01747
   published: 2025
   categories: [generalization, reliability]
-  status: todo
   # ICML 2025, PMLR 267:81143-81184 (https://proceedings.mlr.press/v267/bowyer25a.html)

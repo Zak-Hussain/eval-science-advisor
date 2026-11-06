@@ -15,3 +15,6 @@ It was built and tested with **Claude**, but it follows the open Agent Skills st
 
 Ask your assistant questions like these, and the skill will apply measurement-science reasoning:
 
+## To do:
+- Figure out what to do about paywalled papers. 
+
