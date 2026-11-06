@@ -8,8 +8,6 @@
 #   scoring             Turning outputs into scores: metrics, rubrics, LLM judges, human raters
 #   measurement-models  From item responses to construct scores: IRT, factor analysis, general scales, adaptive/efficient testing
 #   generalization      From scores to claims beyond the test: uncertainty for eval comparisons, coverage, prediction to deployment and future models
-#
-# status: todo | noted | distilled
 
 # --- constructs ----------------------------------------------------------------
 
