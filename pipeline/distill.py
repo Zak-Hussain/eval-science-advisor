@@ -8,13 +8,13 @@ ROOT = Path(__file__).resolve().parent.parent
 
 # Pin both the model and the provider (the part after ":"). Different providers can serve the
 # same open-weights model with different settings, so pinning the provider keeps runs comparable.
-MODEL = "openai/gpt-oss-120b:groq"   # TODO: choose your model and provider
+MODEL = "zai-org/GLM-5.2:deepinfra"   # TODO: choose your model and provider
 MAX_TOKENS = 8000
 CLIENT = InferenceClient()   # reads HF_TOKEN from your environment
 
 # --- What to run: edit these, then press play ----------------------------------
 STEP = "notes"   # "notes", "references" or "skill"
-ONLY = None      # None = everything; or one registry id (notes) / one category (references)
+ONLY = "wallach2025position"      # None = everything; or one registry id (notes) / one category (references)
 # ------------------------------------------------------------------------------
 
 
