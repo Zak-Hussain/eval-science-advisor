@@ -55,6 +55,7 @@ def fetch_arxiv_paper(url: str, out_dir: Path) -> dict:
     pdf_path = download_pdf(arxiv_id, version, out_dir)
     return {"arxiv_id": arxiv_id, "version": version, "pdf_path": pdf_path}
 
+# --- Run ----------------------------------------------------------------------
 
 # Load the registry 
 entries = yaml.safe_load((ROOT / "sources" / "registry.yaml").read_text())
