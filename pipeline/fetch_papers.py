@@ -3,6 +3,7 @@ import re
 import urllib.request
 import yaml
 from datetime import date
+import time
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -66,6 +67,9 @@ for entry in entries:
             "pdf_path": str(result["pdf_path"].relative_to(ROOT)),
             "fetched": date.today(),
         }
+    
+    # arXiv asks scripts to pause between requests 
+    time.sleep(3)
 
 # Save manifest 
 (ROOT / "sources" / "manifest.yaml").write_text(yaml.safe_dump(manifest, sort_keys=False))
