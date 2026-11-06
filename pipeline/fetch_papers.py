@@ -4,6 +4,7 @@ import urllib.request
 import yaml
 from datetime import date
 import time
+from tqdm import tqdm
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -62,7 +63,9 @@ entries = yaml.safe_load((ROOT / "sources" / "registry.yaml").read_text())
 
 # Loop through entries, identify arxiv articles, fetch and save
 manifest = {}
-for entry in entries:
+progress = tqdm(entries, desc="Fetching papers", unit="paper")
+for entry in progress:
+    progress.set_postfix_str(entry['id'])   # show which paper is being fetched
 
     if "arxiv.org" in entry['url']:
         result = fetch_arxiv_paper(entry['url'], ROOT / "sources" / "pdfs")
@@ -72,9 +75,10 @@ for entry in entries:
             "pdf_path": str(result["pdf_path"].relative_to(ROOT)),
             "fetched": date.today(),
         }
-    
-    # arXiv asks scripts to pause between requests 
-    time.sleep(3)
+
+        # arXiv asks scripts to pause between requests 
+        time.sleep(3)
+
 
 # Save manifest 
 (ROOT / "sources" / "manifest.yaml").write_text(yaml.safe_dump(manifest, sort_keys=False))
