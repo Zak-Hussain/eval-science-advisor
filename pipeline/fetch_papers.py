@@ -26,6 +26,8 @@ def resolve_latest_version(arxiv_id: str) -> int:
     url = f"https://arxiv.org/api/query?id_list={arxiv_id}"
     xml = urllib.request.urlopen(url).read().decode()    # The response contains links like 'http://arxiv.org/abs/2405.10938v2'
     match = re.search(rf"{re.escape(arxiv_id)}v(\d+)", xml)
+    if match is None:
+        raise ValueError(f"Could not find a version for arXiv ID {arxiv_id!r} in the API response")
     return int(match.group(1))
 
 
