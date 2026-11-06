@@ -1,8 +1,8 @@
 from pathlib import Path
-
 import yaml
 from huggingface_hub import InferenceClient
-from pypdf import PdfReader
+import pymupdf
+from tqdm import tqdm
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -14,7 +14,7 @@ CLIENT = InferenceClient()   # reads HF_TOKEN from your environment
 
 # --- What to run: edit these, then press play ----------------------------------
 STEP = "notes"   # "notes", "references" or "skill"
-ONLY = "wallach2025position"      # None = everything; or one registry id (notes) / one category (references)
+ONLY = None     # None = everything; or one registry id (notes) / one category (references)
 # ------------------------------------------------------------------------------
 
 
@@ -27,8 +27,8 @@ def load_prompt(name: str, **fields) -> str:
 def pdf_to_text(pdf_path: Path) -> str:
     """Extract the text of a PDF. Open models on the HF API take text, not PDF files,
     so figures are lost and tables may come out jumbled."""
-    reader = PdfReader(pdf_path)
-    return "\n".join(page.extract_text() or "" for page in reader.pages)
+    with pymupdf.open(pdf_path) as doc:
+        return "\n".join(page.get_text() for page in doc)
 
 
 def ask_model(prompt: str) -> str:
@@ -93,7 +93,11 @@ entries = yaml.safe_load((ROOT / "sources" / "registry.yaml").read_text())
 manifest = yaml.safe_load((ROOT / "sources" / "manifest.yaml").read_text())   # written by fetch_papers.py
 
 if STEP == "notes":
-    for entry in entries:
+
+    progress = tqdm(entries, desc="Taking notes", unit="paper")
+    for entry in progress:
+        progress.set_postfix_str(entry['id']) 
+
         if ONLY and entry["id"] != ONLY:
             continue
         if entry["id"] not in manifest:
