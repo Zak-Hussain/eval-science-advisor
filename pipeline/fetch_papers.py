@@ -9,6 +9,8 @@ ROOT = Path(__file__).resolve().parent.parent
 
 _ARXIV_ID_RE = re.compile(r"arxiv\.org/(?:abs|pdf)/(\d{4}\.\d{4,5})(?:v(\d+))?")
 
+# ------------------------------------------------------------------------------
+
 def parse_arxiv_url(url: str) -> tuple[str, int | None]:
 
     """'https://arxiv.org/abs/2405.10938v2' -> ('2405.10938', 2)
