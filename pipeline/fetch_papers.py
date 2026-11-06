@@ -67,8 +67,8 @@ for entry in entries:
             "fetched": date.today(),
         }
 
-
-
+# Save manifest 
+(ROOT / "sources" / "manifest.yaml").write_text(yaml.safe_dump(manifest, sort_keys=False))
 
 
 
