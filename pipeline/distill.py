@@ -8,6 +8,9 @@ from tqdm import tqdm
 ROOT = Path(__file__).resolve().parent.parent
 SKILL_DIR = ROOT / "skills" / "science-of-evals"   # the folder users install
 
+# The advisor's seven categories (see SPEC.md). Notes may use any of them, not only a paper's registry tags.
+CATEGORIES = ["constructs", "validity", "elicitation", "scoring", "reliability", "measurement-models", "generalization"]
+
 # Pin both the model and the provider (the part after ":"). Different providers can serve the
 # same open-weights model with different settings, so pinning the provider keeps runs comparable.
 MODEL = "zai-org/GLM-5.2:deepinfra"   # TODO: choose your model and provider
@@ -15,7 +18,7 @@ MAX_TOKENS = 8000
 CLIENT = InferenceClient()   # reads HF_TOKEN from your environment
 
 # --- What to run: edit these, then press play ----------------------------------
-STEP = "references"   # "notes", "references" or "skill"
+STEP = "notes"   # "notes", "references" or "skill"
 ONLY = None     # None = everything; or one registry id (notes) / one category (references)
 # ------------------------------------------------------------------------------
 
@@ -63,8 +66,14 @@ def advice_by_category(note: str) -> dict[str, str]:
 
     # Splitting on a pattern with a (group) keeps the group, giving
     # [text before the first sub-heading, category, advice, category, advice, ...].
-    parts = re.split(r"^\*([a-z-]+):\*\s*$", match.group(1), flags=re.MULTILINE)
-    return {category: advice.strip() for category, advice in zip(parts[1::2], parts[2::2])}
+    parts = re.split(r"^\*([^*\n]+):\*\s*$", match.group(1), flags=re.MULTILINE)
+    advice = {category: text.strip() for category, text in zip(parts[1::2], parts[2::2])}
+
+    # A misspelled sub-heading (e.g. *Validity:* or *measurement models:*) would otherwise be silently left out.
+    unknown = [category for category in advice if category not in CATEGORIES]
+    if unknown:
+        raise ValueError(f"unknown category sub-heading(s): {unknown}")
+    return advice
 
 
 def make_note(entry: dict, pdf_path: Path) -> None:
@@ -102,7 +111,10 @@ def make_reference(category: str, entries: list[dict]) -> None:
             continue
 
         note = note_path.read_text()
-        advice = advice_by_category(note)
+        try:
+            advice = advice_by_category(note)
+        except ValueError as error:
+            raise ValueError(f"{note_path.name}: {error}") from error
         tagged = category in entry["categories"]
         if category not in advice:
             if tagged:
@@ -150,9 +162,7 @@ if STEP == "notes":
         make_note(entry, ROOT / manifest[entry["id"]]["pdf_path"])
 
 elif STEP == "references":
-    categories = sorted({c for entry in entries for c in entry["categories"]})
-    print(categories)
-    for category in categories:
+    for category in CATEGORIES:
         if ONLY and category != ONLY:
             continue
         make_reference(category, entries)   # all papers: the notes decide which ones belong
