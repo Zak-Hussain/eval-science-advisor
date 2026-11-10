@@ -1,10 +1,12 @@
 from pathlib import Path
+import re
 import yaml
 from huggingface_hub import InferenceClient
 import pymupdf
 from tqdm import tqdm
 
 ROOT = Path(__file__).resolve().parent.parent
+SKILL_DIR = ROOT / "skills" / "science-of-evals"   # the folder users install
 
 # Pin both the model and the provider (the part after ":"). Different providers can serve the
 # same open-weights model with different settings, so pinning the provider keeps runs comparable.
@@ -13,7 +15,7 @@ MAX_TOKENS = 8000
 CLIENT = InferenceClient()   # reads HF_TOKEN from your environment
 
 # --- What to run: edit these, then press play ----------------------------------
-STEP = "notes"   # "notes", "references" or "skill"
+STEP = "references"   # "notes", "references" or "skill"
 ONLY = None     # None = everything; or one registry id (notes) / one category (references)
 # ------------------------------------------------------------------------------
 
@@ -47,6 +49,24 @@ def ask_model(prompt: str) -> str:
     return choice.message.content
 
 
+def advice_by_category(note: str) -> dict[str, str]:
+    """Pull the "What the advisor should take from it" part out of a note and split it
+    into {category: advice text}, using the *<category>:* sub-headings."""
+    # Everything after the heading, up to the next bold heading such as **Caveats:** (or the end).
+    match = re.search(
+        r"^\*\*What the advisor should take from it:\*\*\s*$(.*?)(?=^\*\*[^*\n]+:\*\*|\Z)",
+        note,
+        flags=re.MULTILINE | re.DOTALL,
+    )
+    if not match:
+        raise ValueError("no 'What the advisor should take from it' section")
+
+    # Splitting on a pattern with a (group) keeps the group, giving
+    # [text before the first sub-heading, category, advice, category, advice, ...].
+    parts = re.split(r"^\*([a-z-]+):\*\s*$", match.group(1), flags=re.MULTILINE)
+    return {category: advice.strip() for category, advice in zip(parts[1::2], parts[2::2])}
+
+
 def make_note(entry: dict, pdf_path: Path) -> None:
     """Pass 1: one paper -> sources/notes/<id>.md"""
     note_path = ROOT / "sources" / "notes" / f"{entry['id']}.md"
@@ -67,17 +87,41 @@ def make_note(entry: dict, pdf_path: Path) -> None:
     print(f"Wrote {note_path.relative_to(ROOT)}")
 
 
-def make_reference(category: str, category_entries: list[dict]) -> None:
-    """Pass 2: the notes of every paper tagged with this category -> skills/eval-science-advisor/references/<category>.md
+def make_reference(category: str, entries: list[dict]) -> None:
+    """Pass 2 (no model): copy this category's advice from every note that has a *<category>:*
+    section -> SKILL_DIR/references/<category>.md
 
-    category_entries includes papers whose secondary categories include this one, not just their first.
-
-    TODO:
-      - read each entry's note from sources/notes/<id>.md and join them into one string
-      - prompt = load_prompt("reference_file", category=category, notes=all_notes)
-      - text = ask_model(prompt)
-      - write text to the reference file
+    The notes decide which papers belong to a category, not the registry tags (those were a
+    first guess made without the full text). Mismatches are printed so the registry can be fixed.
+    The file is rebuilt from scratch each run, so edit the notes, not the reference file.
     """
+    sections = []
+    for entry in entries:   # registry order
+        note_path = ROOT / "sources" / "notes" / f"{entry['id']}.md"
+        if not note_path.exists():
+            continue
+
+        note = note_path.read_text()
+        advice = advice_by_category(note)
+        tagged = category in entry["categories"]
+        if category not in advice:
+            if tagged:
+                print(f"  Note: {entry['id']} is tagged {category} in the registry, but its note has no section for it")
+            continue
+        if not tagged:
+            print(f"  Note: {entry['id']} has a {category} section, but isn't tagged {category} in the registry")
+
+        heading = note.splitlines()[0].lstrip("#").strip()   # e.g. "Adding Error Bars to Evals (Miller, 2024)"
+        sections.append(f"## {heading}\n\n{advice[category]}")
+
+    text = (
+        f"<!-- Built by pipeline/distill.py from sources/notes/. Edit the notes, not this file. -->\n"
+        f"# {category}\n\n" + "\n\n".join(sections) + "\n"
+    )
+    reference_path = SKILL_DIR / "references" / f"{category}.md"
+    reference_path.parent.mkdir(parents=True, exist_ok=True)
+    reference_path.write_text(text)
+    print(f"Wrote {reference_path.relative_to(ROOT)} ({len(sections)} papers)")
 
 
 def make_skill() -> None:
@@ -96,7 +140,7 @@ if STEP == "notes":
 
     progress = tqdm(entries, desc="Taking notes", unit="paper")
     for entry in progress:
-        progress.set_postfix_str(entry['id']) 
+        print(f"Processing {entry["id"]}")
 
         if ONLY and entry["id"] != ONLY:
             continue
@@ -107,10 +151,11 @@ if STEP == "notes":
 
 elif STEP == "references":
     categories = sorted({c for entry in entries for c in entry["categories"]})
+    print(categories)
     for category in categories:
         if ONLY and category != ONLY:
             continue
-        make_reference(category, [e for e in entries if category in e["categories"]])
+        make_reference(category, entries)   # all papers: the notes decide which ones belong
 
 elif STEP == "skill":
     make_skill()
