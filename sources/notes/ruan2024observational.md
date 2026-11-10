@@ -1,30 +1,33 @@
 # Observational Scaling Laws (Ruan et al., 2024)
 
-**What kind of evidence:** Empirical methods paper proposing and validating a scaling-law framework across ~100 publicly available LMs.
+**What kind of evidence:** Empirical study with methods paper elements, analyzing ~77 pretrained and ~20 instruction-tuned public models.
 
 **Key claims:**
-- Standard LM benchmark performance across 21 model families is low-dimensional: top 3 principal components (PCs) explain ~97% of variance, with PC-1 alone explaining ~80%.
-- These PCs correlate log-linearly with training FLOPs within each model family (R² > 0.9), enabling a shared capability scale across heterogeneous families.
-- Capabilities labelled "emergent" (e.g., 3-digit subtraction, word unscramble) follow smooth sigmoidal curves and are predictable from small models using PCs, far better than using raw FLOPs or model size.
-- Agentic performance (AgentBench, AgentBoard) of GPT-4/Claude-2 is accurately predicted from weaker models' PC measures; programming capability (HumanEval) is a key driver.
-- Post-training interventions (CoT, Self-Consistency) show predictable, differential scaling trends; CoT scales more aggressively than SC.
-- A V-optimality criterion selects 10–20 representative models that reproduce full-set prediction accuracy.
+- Standard LM benchmarks are low-dimensional: top 3 principal components explain ~97% of variance, with interpretable axes (general, reasoning, programming).
+- These principal capability (PC) measures scale log-linearly with log-training-FLOPs within each model family (R² > 0.9), serving as a cross-family surrogate for compute.
+- "Emergent" capabilities (e.g., 3-digit subtraction, word unscramble) follow smooth sigmoidal curves and are predictable from sub-7B models when using PC measures rather than raw FLOPs.
+- Agentic performance (AgentBench, AgentBoard) is predictable from simple benchmark metrics; programming capability (HumanEval) carries the highest fitted weight.
+- Post-training gains from CoT and Self-Consistency scale predictably; CoT shows stronger scaling than SC, with higher weights on MMLU and HumanEval.
+- As few as 10-20 models selected via V-optimality suffice for accurate scaling predictions.
 
 **What the advisor should take from it:**
 
+*constructs:*
+- A small set of latent capability dimensions (general, reasoning, code) underlies most standard benchmarks, suggesting benchmark batteries are not measuring independent constructs.
+- PC-1 serves as a broad "general capability" factor with high dynamic range across 5 orders of magnitude, unlike single benchmarks that saturate or stay at chance.
+
 *measurement-models:*
-- PCA on a benchmark–model matrix extracts interpretable latent capability dimensions (PC-1: general; PC-2: reasoning; PC-3: programming), analogous to factor scores in psychometrics.
-- The framework formalises a two-stage model: benchmarks → PC capability scores → downstream performance via sigmoidal regression, enabling cross-family comparison without compute access.
-- f-equivalent FLOPs transform maps any model onto a reference family's compute scale, making heterogeneous models comparable on one axis.
+- PCA on a benchmark-by-model matrix extracts latent capability measures that are more robust predictors than raw compute or model size, because they are comparable across heterogeneous model families.
+- A logistic link maps the linear PC combination to normalized downstream accuracy, with an optional floor parameter h.
 
 *generalization:*
-- Observational scaling laws let evaluators extrapolate held-out strong models' performance from weaker ones with low MSE, including preregistered forecasts validated on post-release models (Llama-3.1-405B).
-- Using 77+ models provides resolution sufficient to reveal that "discontinuous emergence" is often a sigmoid viewed at low resolution.
-- Recommended model subsets (Table 1) give practitioners a concrete starting kit for cost-efficient scaling analyses.
+- Fit scaling laws on weak models (FLOPs ≤ Llama-2-7B) and extrapolate to stronger ones; PC measures yield lower MSE than compute baselines on holdout and preregistered future models (Llama-3.1-405B, Qwen2-72B).
+- Sigmoidal curves predict transition points for "emergent" tasks, reframing discontinuity as an artifact of low resolution.
 
-**Caveats:**
-- Does not directly address pretraining optimisation; suited to post-training and downstream capability forecasting.
-- Assumes no benchmark contamination and uniform efficiency within a family; both can bias PC extraction and predictions.
-- Validated mainly on few-shot/CoT-style evaluation; extension to fine-tuning or heavy inference-time compute is untested.
+*validity:*
+- Claims of emergence are sensitive to the number of data points and metric choice; high-resolution scaling analyses reveal smooth transitions.
+- Single benchmarks have limited dynamic range (saturation or chance-level), threatening construct validity at the extremes.
 
-**Other categories:** *constructs:* PCs operationalise general, reasoning, and programming as latent capability constructs. *scoring:* accuracy metrics normalised to [0,1] feed sigmoidal regression; floor-performance parameter h accounts for metric ceilings.
+**Caveats:** Observational laws are post-training analysis tools, not pretraining optimizers. Assumes no benchmark contamination and homogeneous compute efficiency within families. Prediction accuracy degrades when extrapolating from very few near-chance data points. The approach is validated only on few-shot and basic prompting setups.
+
+**Category changes:** Added constructs and validity: the paper provides evidence about latent capability structure and threats to emergence claims; the suggested measurement-models and generalization are confirmed.

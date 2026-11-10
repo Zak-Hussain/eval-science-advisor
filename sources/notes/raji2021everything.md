@@ -1,31 +1,30 @@
-# The "Everything in the Whole Wide World" Benchmark (Raji et al., 2021)
+# The “Everything in the Whole Wide World” Benchmark (Raji et al., 2021)
 
-**What kind of evidence:** Position paper with illustrative case studies of ImageNet and GLUE/SuperGLUE.
+**What kind of evidence:** Position paper with illustrative case studies.
 
 **Key claims:**
-- Benchmarks framed as measuring "general" capabilities (e.g., general language understanding, general-purpose object recognition) suffer construct validity failures because they are finite, subjective, and context-bound, yet presented as universal.
-- Task selection in "general" benchmarks is arbitrary rather than theory-driven: GLUE tasks came from an informal survey of ~30 colleagues; ImageNet categories were lifted from WordNet subtrees with little consideration of suitability.
-- GLUE conflates distinct constructs—linguistic competence, world knowledge, and commonsense reasoning—under one "language understanding" label, though these differ in scope and testability.
-- De-contextualized reporting hides geographic and cultural bias: 45% of ImageNet images sourced from the US, only 1% from China; offensive categories found in the "person" subtree.
-- Competitive SOTA-chasing distorts research agendas and enables misleading marketing claims (e.g., Microsoft calling SuperGLUE performance a milestone "toward general AI").
-- Aggregate benchmark scores can mask harmful subgroup performance disparities, as later demonstrated in commercial facial recognition audits.
-
-**What the advisor should take from it:**
+- Benchmarks like ImageNet and GLUE are framed as measures of general capabilities (visual understanding, language understanding), but this framing lacks construct validity because datasets are finite, specific, and contextual.
+- Tasks in “general” benchmarks are arbitrarily selected rather than systematically mapped to a construct; GLUE tasks came from an informal survey of ~30 colleagues, not a theory of linguistic competence.
+- Such benchmarks conflate distinct constructs—e.g., linguistic competence with world knowledge and commonsense reasoning—making them invalid as measures of any single capability.
+- Benchmark data is de-contextualized and subjective: 45% of ImageNet images are US-sourced, and GLUE targets specific varieties of English with annotation artifacts.
+- Aggregate performance on “general” benchmarks can mask disparate failures on minority subgroups, enabling unsafe deployment justification.
+- The Common Task Framework was built for tightly scoped practical tasks; extending it to abstract “general” performance subverts its purpose.
 
 *constructs:*
-- Define the construct explicitly and independently of the dataset; do not let the dataset implicitly become the construct definition.
-- Avoid conflating multiple distinct capabilities under a single benchmark label—separate linguistic competence from world knowledge, commonsense reasoning, etc.
-- Justify task/category selection with reference to a theory of the target capability, not convenience or precedent.
+- Define constructs narrowly before benchmarking; “general-purpose” capability labels are too vague to operationalize in a single dataset.
+- Avoid merging distinct constructs (e.g., linguistic form vs. world knowledge) under one benchmark without justifying why they should be measured together.
+- Ground task selection in a theory of the target construct, not convenience or availability of data.
 
 *validity:*
-- Benchmark scores do not automatically support claims beyond the specific tasks and data they contain; restrict claims to what was actually tested.
-- The Common Task Framework was designed for tightly scoped practical tasks—extending it to abstract "general performance" claims is an invalid generalization.
-- Report context, scope, and known limitations of the dataset rather than presenting it as neutral and universal.
-- Check whether aggregate scores mask differential performance across socially salient subgroups.
+- Treat construct validity as a design task: ask whether the data, metric, and methodology actually represent the claimed capability, not just whether they produce reproducible scores.
+- Scrutinize the gap between benchmark scores and real-world deployment claims; SOTA on a general benchmark does not support claims about deployment readiness or AGI progress.
+- Use disaggregated analysis to check whether aggregate scores hide failures on specific subgroups—especially when benchmarks justify commercial deployment.
+- Document the subjective, culturally-situated limitations of the dataset rather than presenting it as neutral.
 
-**Caveats:**
-- The paper is a position paper, not an empirical study; case studies are illustrative rather than systematic.
-- Focus is limited to dataset-based benchmarks; gameplay/RL environments receive little attention.
-- The alternative evaluation methods are surveyed briefly but not empirically compared against benchmarking.
+*generalization:*
+- Do not assume benchmark coverage matches deployment scope: evaluate geographic, temporal, and demographic alignment between the test set and the intended application context.
+- Resist extrapolating from benchmark scores to out-of-context applications; the paper cites cases where firms cited benchmark performance as evidence of broad technical achievement.
 
-**Other categories:** `scoring` (briefly: aggregate metrics like average accuracy across tasks are criticized as meaningless when task meanings differ); `generalization` (briefly: claims of general capability from benchmark performance are the central invalid inference the paper critiques).
+**Caveats:** Conceptual argument supported by illustrative examples, not systematic empirical measurement. Analysis centers on two case studies (ImageNet, GLUE); applicability to other benchmark types (e.g., RL environments) is acknowledged but not explored. Proposed alternatives (test suites, audits, ablation) are surveyed briefly without validation of effectiveness.
+
+**Category changes:** Added generalization: the paper substantially discusses coverage limits and deployment mismatch; dropped elicitation, scoring, reliability, and measurement-models as they are not addressed.

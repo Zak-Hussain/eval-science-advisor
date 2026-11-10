@@ -1,30 +1,38 @@
 # Don't Use the CLT in LLM Evals With Fewer Than a Few Hundred Datapoints (Bowyer et al., 2025)
 
-**What kind of evidence:** Position paper with extensive simulation experiments comparing interval methods across small-N eval scenarios.
+**What kind of evidence:** Position paper with extensive empirical simulations using known ground-truth parameters.
 
 **Key claims:**
-- CLT-based confidence intervals systematically under-cover in small-data LLM evals (e.g., at N=100, 95% CLT intervals achieve only ~92.5% coverage), producing error bars that are too narrow.
-- CLT intervals can collapse to zero width (when a model gets all items right or wrong) or extend beyond [0,1], both invalid for proportions.
-- Bootstrap intervals also under-cover in small-N settings.
-- Bayesian credible intervals (Beta-Bernoulli conjugate, or importance sampling for clustered/paired settings) and the frequentist Wilson score interval achieve near-nominal coverage even at N=3.
-- No simple frequentist alternative exists for clustered or paired data structures; Bayesian methods via importance sampling fill this gap.
-- For non-linear metrics like F1-scores or odds ratios, the CLT is not directly applicable; Bayesian methods using Dirichlet-Multinomial posteriors handle these naturally.
+- CLT-based confidence intervals systematically under-cover for evals with fewer than a few hundred examples; at N=100, 95% CLT intervals achieved only ~92.5% coverage.
+- CLT intervals can collapse to zero width (all questions right/wrong) or extend beyond [0,1], producing nonsensical error bars.
+- Bootstrap intervals also under-cover in small-data settings.
+- Bayesian Beta-Bernoulli credible intervals and Wilson score intervals achieve good coverage even for small N in the IID single-model setting.
+- For clustered data (e.g., multiple questions per passage), only Bayesian methods modelling the clustering achieve correct coverage; no simple frequentist alternative exists.
+- For non-linear metrics (F1, odds ratio), the CLT/delta method performs poorly; Bayesian methods via Dirichlet-Categorical or Beta posteriors work well.
+- Bayesian methods enable direct probabilistic model comparison (P(θA > θB | data)), which frequentist methods cannot provide.
 
 **What the advisor should take from it:**
 
 *generalization:*
-- When extrapolating from a small benchmark to claims about model capability, use Bayesian or Wilson intervals—not CLT intervals—to avoid overstating precision.
-- For clustered benchmarks (e.g., multiple questions per passage), only a Bayesian clustered model (Beta-Binomial likelihood) gives valid coverage; neither plain nor clustered-CLT adjustments suffice at small N.
-- Bayesian posteriors allow direct probabilistic statements (e.g., P(model A > model B)), which frequentist intervals cannot provide.
+- For evals with fewer than a few hundred items, do not report CLT-based error bars; they typically overstate confidence by producing intervals that are too narrow.
+- For single-model IID accuracy, use Bayesian Beta-Bernoulli credible intervals or Wilson score intervals (both trivial to implement via SciPy).
+- For model comparison, sample from Beta posteriors to get credible intervals on the difference or odds ratio, and to compute P(model A > model B).
+- For clustered evals, use a hierarchical Bayesian model (Beta-Binomial with dispersion parameter) fitted via importance sampling; code is provided in the paper's library.
 
 *reliability:*
-- Error bars on LLM evals are a reliability requirement; CLT-based bars are unreliable below a few hundred datapoints and should be replaced.
-- For paired comparisons (same questions across models), paired Bayesian inference via importance sampling accounts for inter-model correlation and yields narrower, better-calibrated intervals than unpaired approaches.
-- Computational cost of Bayesian methods is negligible (under ~200ms) relative to eval-running cost.
+- Bootstrap intervals are not a safe fallback for small N; they also under-cover.
+- Coverage—the proportion of intervals containing the true parameter—is the key diagnostic for whether error bars are reliable.
 
-*Caveats:*
-- Simulations use uniform Beta(1,1) priors; under prior mismatch (e.g., true θ near 0.95), Bayesian intervals can over-cover for very small N but recover quickly as N grows.
-- The threshold "fewer than a few hundred" is deliberately vague; no hard N* exists, and adequacy depends on data structure and true parameters.
-- Experiments are simulations, not real eval data; real-world coverage may differ, though real-data examples (LangChain, AIME) show the same qualitative failure modes.
+*validity:*
+- Significance claims built on under-covering intervals are invalid; using methods that achieve nominal coverage is necessary for trustworthy model comparisons.
+- Large benchmarks broken into sub-tasks cannot invoke total N for CLT justification, since sub-task data is not IID.
 
-**Other categories:** *scoring* — the paper provides concrete guidance for non-linear metrics (F1, odds ratios) where CLT fails entirely, recommending Dirichlet-Multinomial Bayesian posteriors.
+*scoring:*
+- For confusion-matrix metrics like F1 or MCC, use Bayesian intervals from a Dirichlet-Categorical posterior rather than the delta method.
+
+**Caveats:**
+- Coverage experiments use simulated data with known ground truth, not real LLM outputs (real examples are illustrative only).
+- Uniform/non-informative priors are used throughout; informative priors could tighten intervals but risk bias if misspecified.
+- The "few hundred" threshold is deliberately not a hard cutoff—context-dependent and difficult to determine a priori.
+
+**Category changes:** Added validity and scoring to the suggested generalization and reliability; all four are substantially informed.

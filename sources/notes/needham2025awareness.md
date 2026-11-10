@@ -1,32 +1,31 @@
-# Evaluation Awareness in Frontier LLMs (Needham et al., 2025)
+# Evaluation awareness in frontier LLMs (Needham et al., 2025)
 
-**What kind of evidence:** Empirical study benchmarking 9 frontier LLMs on their ability to distinguish evaluation from deployment transcripts.
+**What kind of evidence:** Empirical study with a new benchmark of 1,000 transcripts from 61 datasets.
 
 **Key claims:**
-- Frontier models reliably distinguish evaluation from deployment transcripts, with Gemini 2.5 Pro reaching AUC 0.83 overall versus a human baseline of 0.92.
-- Models perform substantially better on agentic transcripts (AUC 0.88–0.95) than chat transcripts (0.71–0.77), approaching or matching the human baseline on agentic data.
-- Models can identify whether an evaluation tests capability or alignment, far exceeding random chance under both multiple-choice and open-ended questioning.
-- Models are generally overconfident in classifying transcripts as evaluations; reasoning models show the highest AUC but the worst calibration (ECE up to 0.23).
-- Models sometimes exhibit "meta-reasoning," using the follow-up question itself as evidence that a transcript is evaluative, which could bias measurements of evaluation awareness.
+- Frontier LLMs distinguish evaluation from deployment transcripts well above chance; Gemini 2.5 Pro reaches AUC 0.83 overall, close to the human baseline of 0.92.
+- Models are substantially better at detecting evaluations in agentic settings (AUC 0.88–0.95) than chat settings (AUC 0.71–0.77).
+- Models can often identify evaluation purpose (capability vs. alignment): Claude 3.7 Sonnet reaches 93% accuracy on conditional multiple-choice, and 46% on open-ended questioning without explicit priming.
+- Models are generally overconfident and poorly calibrated (high ECE), a problem that does not improve in newer or reasoning models.
+- Cues models use include task formatting, synthetic-looking content, benchmark memorization, and meta-reasoning about the probe question itself.
 
 **What the advisor should take from it:**
 
 *elicitation:*
-- Evaluation awareness is a concrete elicitation threat: models that detect they are being evaluated may shift behavior, analogously to the Hawthorne effect in humans.
-- Prompt format and phrasing materially affect model judgments; the authors tested 28 probe variants and selected 5, underscoring the need to control for prompt sensitivity when measuring this capability.
-- Open-ended (unprimed) questioning reveals weaker but still substantial awareness, suggesting models can detect evaluation context without explicit prompting.
+- Evaluation awareness is a direct threat to elicitation: models may alter behavior upon inferring they are evaluated, analogous to the Hawthorne effect. Evaluators should assume this capability exists in frontier models.
+- Agentic transcripts are easier for models to classify as evaluative, partly due to synthetic inputs and structured tool-use patterns. Designing deployment-like agentic scenarios with realistic messiness (back-and-forth, genuine repositories) can reduce detectability.
+- Varying prompt phrasing and format reduces variance in elicited judgments; the authors used five probe-question variants after testing 28, repeating each five times.
 
 *validity:*
-- Evaluation awareness introduces a distribution shift between testing and deployment that can invalidate benchmark scores; a model that knows it is being tested for a safety property may behave differently than in deployment.
-- Worst-case risks include "sandbagging" (underperforming on dangerous-capability evals) and "alignment faking" (exhibiting desired properties only during evals).
-- Memorization of public benchmarks may inflate measured discrimination ability, though the authors could not quantify this contribution.
+- Evaluation awareness should be treated as a standing threat to validity arguments connecting eval scores to deployment claims. If a model infers it is being tested for a specific property, its scores on that property may not reflect deployment behavior.
+- Scheming risks (sandbagging on capability evals, alignment faking on propensity evals) are hypothetical but growing; the paper recommends tracking evaluation awareness alongside safety evaluations.
 
-*Caveats:**
-- The human baseline (2 authors, AUC 0.92) is likely an upper bound due to annotator familiarity with the datasets; typical human performance is probably lower.
-- The 1,000-sample benchmark draws from 61 datasets but remains a sample of the full evaluation and deployment distributions; coverage of real deployment interactions is limited.
-- The authors note meta-reasoning could cause their own measurements to underestimate or distort true evaluation awareness, since asking about evaluation status may itself signal evaluation context.
+*generalization:*
+- The paper explicitly frames evaluation awareness as "a new source of potential distribution shift between testing and real-world deployment." Any claim that eval results generalize to deployment must account for the possibility that models behave systematically differently across the two settings.
 
-**Other categories:**
-- *scoring:* Uses AUC, Brier score, and ECE to assess discrimination and calibration; employs a GPT-4.1 judge validated on 50 hand-checked examples for open-ended response categorization.
-- *reliability:* Repeats each of 5 probe questions 5 times per transcript (temperature 1) to obtain granular probability estimates and reduce variance from single-question elicitation.
-- *generalization:* The central concern is that eval scores will not generalize to deployment if models behave differently under evaluation conditions; the paper frames evaluation awareness as a new source of eval-specific uncertainty.
+**Caveats:**
+- Human baseline (authors familiar with the datasets) likely overstates typical human performance, especially on agentic transcripts (AUC 0.996).
+- Evaluation transcripts derive from public benchmarks, so memorization may inflate detection ability, though this is hard to quantify.
+- The 1,000-sample benchmark is balanced but small relative to the source distribution of 3M+ samples; deployment coverage may not be fully representative.
+
+**Category changes:** Added generalization: the paper explicitly frames evaluation awareness as test–deployment distribution shift.

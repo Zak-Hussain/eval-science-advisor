@@ -1,33 +1,33 @@
-# Apparent Psychological Profiles as Measurement Artifacts (Meyer et al., 2026)
+# LLM Psychological Profiles are Measurement Artifacts (Meyer et al., 2026)
 
-**What kind of evidence:** Empirical study administering personality and risk-preference instruments to 56 instruction-tuned LLMs with large human reference samples.
+**What kind of evidence:** Empirical study using a formal psychometric framework.
 
 **Key claims:**
-- Between-model variation in LLM responses is driven by directional response bias, not target traits: 81–90% of between-model variance is bias versus 9–16% in humans.
-- Apparent internal consistency is almost entirely predicted by response orthogonality (proportion of reverse-keyed items): cross-instrument r = −0.95 for LLMs versus −0.41 for humans.
-- Response bias declines with model capability but is not eliminated; even proprietary models remain outside human ranges.
-- Psychological profiles shift with item keying and can be manufactured through forward- or reverse-heavy item selection.
-- The pattern holds across ten prompting conditions, model sizes, and is not explained by negation handling or degenerate responders.
+- Between-model differences on human psychological instruments (e.g., Big Five, risk preference) are driven primarily by a directional response bias rather than the targeted traits, accounting for 81–90% of between-model variance versus 9–16% in humans.
+- Apparent reliability in LLMs is almost entirely predicted by an instrument’s response orthogonality (proportion of reverse-keyed items), with cross-instrument correlation r = -0.95. Fully orthogonal instruments yield near-zero or negative reliability.
+- The bias attenuates with model capability (size/proprietary status) but is not eliminated; even the most capable models fall outside the human range.
+- Because bias drives responding, the apparent psychological profile of a model shifts depending on item keying and can be manufactured through item selection.
 
 **What the advisor should take from it:**
 
 *constructs:*
-- Apparent psychological profiles in LLMs do not reflect the traits instruments claim to measure; they largely reflect a directional response tendency toward one end of the scale.
-- Whether LLMs possess human-like stable dispositions remains open; borrowed human instruments may lack construct validity for LLMs because items presuppose embodiment or volition.
+- Be cautious when attributing human-like psychological traits to LLMs using borrowed psychometric instruments; LLMs may lack stable dispositions for these constructs, or the instruments may lack validity for LLMs.
 
 *validity:*
-- Without response orthogonality, trait and response bias are confounded; high reliability alone does not establish a valid construct.
-- Existing LLM psychological profiles and their reliability coefficients need re-evaluation against orthogonality.
-- Valid assessment requires either fully orthogonal instruments or an explicit psychometric measurement model that separates trait from bias.
+- High internal consistency (e.g., Cronbach’s alpha) does not establish that a construct is being measured; response bias can inflate apparent consistency just as a shared construct would.
+- Profiles derived from non-orthogonal instruments are confounded and cannot be interpreted as evidence of genuine traits. Existing LLM psychological profiles need re-evaluation against response orthogonality.
 
 *reliability:*
-- High internal consistency (Cronbach's α up to 0.96) on forward-keyed instruments is a bias artifact, not evidence of a coherent latent trait; reliability collapses (α negative) under balanced keying.
-- The orthogonality-consistency gradient is a diagnostic: if reliability plummets when reverse-keyed items are added, responding is bias-driven, not trait-driven.
-- Behavioral tasks fare no better than self-reports; they show greater sensitivity to response bias.
+- Apparent reliability in LLM evals can be entirely artifactual. If an instrument lacks reverse-keyed items, high inter-item correlation may reflect a directional response tendency rather than coherence.
+- Test whether reliability survives under full response orthogonality (balanced forward and reverse keying). If reliability collapses to near zero, the original consistency was bias-driven.
+
+*measurement-models:*
+- Use formal measurement models to separate trait from response bias. The paper models responses by partitioning variance into a trait component (half-difference of forward/reverse means) and a bias component (half-sum).
+- Design or evaluate instruments with "response orthogonality": include items where the trait-favored option occupies different positions so trait and bias act in opposite directions.
 
 **Caveats:**
-- Only 56 models (10 proprietary); proprietary subset too small for standard inferential tests.
-- Only post-trained instruction-tuned models assessed; base models untested.
-- Two domains covered (personality and risk); generalization to other domains untested.
+- Treats each LLM as a single respondent in its default state; within-model variation from steering or persona prompting is not assessed.
+- The instruments were designed for humans and may inherently lack validity for LLMs, which lack embodiment or volition for some items.
+- Only post-trained instruction-tuned models were tested; base models and other architectures might behave differently.
 
-**Other categories:** Elicitation (bias pattern robust across ten prompting conditions including context, elicitation method, and option order); measurement-models (formal variance-decomposition framework separating trait from response bias via orthogonal contrasts).
+**Category changes:** Added measurement-models for the formal psychometric framework; retained all suggested categories.

@@ -1,45 +1,38 @@
-# Dispositional Measurement for AI Evaluation (Voudouris et al., 2026)
+# Dispositional measurement of capabilities and propensities (Voudouris et al., 2026)
 
-**What kind of evidence:** Position paper / theoretical framework drawing on philosophy of science, measurement theory, and cognitive science.
+**What kind of evidence:** Position paper building on philosophy of science, measurement theory, and cognitive science.
 
 **Key claims:**
-- Capabilities and propensities are dispositional properties: stable, intrinsic features characterised by counterfactual relationships between contextual conditions and behavioural outputs. Capabilities co-vary with task demands; propensities co-vary with incentives.
-- Dispositions require a causal basis (system properties × context → behaviour), gradedness, and comparability across systems.
-- Benchmarking and elicitation do not measure dispositions: they sample performance in narrow regions of contextual space without identifying which contextual properties causally drive behaviour.
-- Data-driven IRT infers difficulty and ability solely from performance covariance, making latent variables circular and population-dependent; without independently grounded task-structure theory, IRT summarises patterns rather than measuring dispositions.
-- Scientific measurement of dispositions requires: (1) defining the subject, (2) hypothesising causal contextual properties, (3) operationalising those properties independently of performance, (4) empirically mapping p(v|π,θ) across systematic variation.
-- Dispositional measurement enables extrapolation beyond observed performance, including into superhuman and ethically prohibited regimes.
+- Capabilities and propensities are dispositional properties: stable intrinsic features defined by counterfactual relationships between contextual conditions and behavioural outputs.
+- Capabilities co-vary with task-demand components of context; propensities co-vary with incentive-relevant components. Both are formally captured as p(v|π,θ).
+- Benchmarking conflates sampled performance with underlying disposition because it does not identify which contextual properties causally drive behaviour.
+- Data-driven IRT infers difficulty and ability solely from performance covariance, making latent variables circular (difficulty is whatever systems fail) and population-dependent.
+- A systematic review of 445 LLM benchmarks found ~50% target contested or undefined constructs, >25% use convenience sampling, and <1 in 6 employ statistical testing.
+- Disposition-respecting measurement requires four steps: define the subject, hypothesise causal contextual variables, operationalise them independently of performance, and empirically map how p(v|π,θ) changes as context varies.
 
 **What the advisor should take from it:**
 
 *constructs:*
-- Define the measurement target explicitly as a disposition: specify the target behaviour v, the contextual space π, and whether π components are demand-relevant (capability) or incentive-relevant (propensity).
-- Distinguish performance (a manifestation in one context) from the underlying disposition (the full counterfactual relationship). Aggregate scores are not dispositions.
-- Capabilities and propensities are conceptually independent; both can co-exist and should be measured separately rather than inferred from each other.
+- Distinguish capabilities (co-vary with demands/difficulty) from propensities (co-vary with incentives). Both are dispositions, not performances.
+- Performance on a dataset is a manifestation of a disposition in a narrow context, not the disposition itself.
 
 *validity:*
-- Construct validity requires a defensible theoretical link between task items and the target disposition. A review of 445 LLM benchmarks found nearly half target contested or undefined constructs, over a quarter use convenience samples, and fewer than 1 in 6 use statistical testing.
-- Benchmarks conflate base model, system prompts, safety filters, tool pipelines, and human evaluators — the subject of measurement is often unspecified, making scores uninterpretable.
-- Confounds such as prompt phrasing, response format, and data contamination inflate or deflate scores without reflecting the underlying disposition.
-
-*elicitation:*
-- Red-teaming and adversarial prompting sample a tiny, human-selected region of contextual space, yielding anecdotes of failure rather than measurements of inclination.
-- Elicitation cannot distinguish behaviours arising only under contrived provocation from those that would robustly manifest across relevant counterfactual contexts.
-- A disposition-respecting alternative: systematically vary incentive-relevant contextual features (e.g., justificatory framing, oversight cues, perceived user vulnerability) and map how the probability of the target behaviour changes, rather than seeking single worst-case failures.
+- A score has construct validity only if the tasks operationalise contextually relevant variables that are hypothesised to causally structure the disposition—convenience-sampled items do not meet this bar.
+- Define the subject of measurement explicitly (base model vs. deployed system with filters and tools); different system boundaries yield different dispositions.
 
 *measurement-models:*
-- Data-driven IRT difficulty parameters are circular: they are whatever items systems fail, not independently characterised task features. Two items with identical difficulty may require entirely different skills.
-- IRT ability and difficulty are population-dependent: adding or removing systems shifts all estimates. A disposition must be a property of the system itself, not an artefact of the comparison class.
-- IRT can support disposition measurement only when paired with an externally grounded theory of task structure (e.g., working-memory theory in psychometrics). Without it, latent variables are statistical decompositions, not measurements of dispositions.
+- IRT and latent-variable models are only defensible when item difficulty is tied to independently characterised, externally measurable task features, not inferred from pass rates alone.
+- Difficulty parameters that shift when the population of evaluated systems changes cannot represent system-intrinsic dispositions.
 
 *generalization:*
-- Benchmarks require known answers and human-authored items; elicitation requires human judgement. Both fail as systems exceed human competence or when tasks are too dangerous to administer.
-- Dispositional measurement enables extrapolation: vary π across safe tasks sharing structural properties with dangerous ones, estimate p(v|π,θ), and infer behaviour in unobserved or prohibited regions — analogous to estimating tensile strength without catastrophic failure.
-- Measurements expressed in terms of theory-grounded external variables (not performance-derived latent scores) can generalise beyond the tested range and support principled cross-system comparison.
+- Because dispositions are counterfactual, measurement must support extrapolation beyond tested ranges—both beyond human-level performance and into unsafe domains where direct testing is prohibited.
+- Extrapolation is feasible by varying contextual properties across benign tasks that share structural features with dangerous ones, then inferring the response function in unobserved regions.
+
+*elicitation:*
+- Red-teaming samples a small, adversarially selected region of contextual space and yields anecdotes of failure, not measurements of inclination; it cannot distinguish contrived provocation from robust counterfactual tendencies.
 
 **Caveats:**
-- The paper is a conceptual framework, not an empirical validation; the toy illustrations (arithmetic capability, honesty propensity) are deliberately simplified demonstrations, not tested protocols.
-- The field lacks mature theories specifying which contextual properties matter for AI dispositions; identifying these is the central scientific challenge, not a solved problem.
-- The authors acknowledge that partitioning π into demand vs. incentive components may not be the only principled partition; other dimensions (modality, time pressure, tool availability) may define additional dispositional kinds.
+- The paper offers a conceptual scaffold, not a validated methodology; the four-step framework is illustrated with toy examples only.
+- Identifying which contextual properties matter for specific dispositions remains an open empirical challenge the authors flag as the central task ahead.
 
-**Other categories:** none.
+**Category changes:** Added validity and elicitation; the suggested list omitted validity and only mentioned elicitation as a starting category.

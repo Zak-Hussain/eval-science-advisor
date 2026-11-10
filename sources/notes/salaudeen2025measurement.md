@@ -1,33 +1,34 @@
 # Measurement to Meaning: A Validity-Centered Framework for AI Evaluation (Salaudeen et al., 2025)
 
-**What kind of evidence:** Position paper with conceptual framework, drawing on psychometrics, illustrated via case studies of GPQA and ImageNet.
+**What kind of evidence:** Position paper with illustrative case studies.
 
 **Key claims:**
-- Validity in AI evaluation depends on the *claim* being made, not just the measurement or evaluation; the same evidence can support narrow claims but fail to support broad ones.
-- Five forms of validity—content, criterion, construct, external, consequential—are each necessary, but which ones require active investigation depends on whether the claim targets a criterion (directly measurable) or a construct (abstract).
-- When the measured object differs from the claim's object, criterion validity (predictive or concurrent) is essential for criterion-targeted claims; construct validity (structural, convergent, discriminant) is essential for construct-targeted claims.
-- A nomological network—mapping relationships among constructs and their observable indicators—is critical for construct validity but is largely missing in current AI evaluation.
-- Validity is iterative and never fully resolved; imperfect measurements can still support valid but narrower-scoped claims.
+- Validity depends on the claim being made, not just the measurement; the same evaluation can support narrow claims while failing to support broad ones.
+- Five forms of validity—content, criterion, construct, external, consequential—are most relevant for AI evaluation, and different claims require different subsets.
+- When the claim's object is a directly measurable criterion matching the measurement, construct and criterion validity are trivially satisfied; content and external validity suffice.
+- When the claim's object is a construct (e.g., "reasoning"), construct validity is essential, requiring structural, convergent, and discriminant evidence.
+- A nomological network mapping constructs to observables is necessary for validating construct claims but is largely absent in current AI evaluation.
+- Imperfect measurements can still support well-scoped claims; rejecting evaluations outright when some validity criteria fail loses useful information.
 
 **What the advisor should take from it:**
 
-*constructs:*
-- Distinguish explicitly whether the claim targets a criterion (e.g., "accuracy on textbook linear algebra questions") or a construct (e.g., "mathematical reasoning"); this determines the evidence standard.
-- Constructs gain meaning only through their relationships with other constructs and observables (a nomological network); claims about a construct cannot be validated in isolation.
-- For construct-targeted claims, assess structural validity (does the test's internal structure match the construct's subskills?), convergent validity (does it correlate with other measures of the same construct?), and discriminant validity (does it fail to correlate with measures of unrelated constructs?).
-
 *validity:*
-- Before validating, articulate three components: the object of the claim, the claim itself, and the evidence; then assess the conceptual gap between evidence and claim.
-- Use the decision tree (Figure 2): if measurement equals the criterion, content and external validity suffice; if measurement differs from the criterion, add criterion validity; if the claim is about a construct, add construct validity.
-- Content and external validity must always be established; consequential validity should be assessed when evaluation results inform high-stakes decisions (e.g., EU AI Act risk classification).
-- Table 4 provides concrete risks, investigation tools (expert review, red-teaming, factor modeling, stress testing, stakeholder audits), and evidence exemplars for each validity form.
+- Use the three-question decision process: (1) Is the claim's object a criterion or construct? (2) Does the measurement match the claim's object? (3) Is a mediating construct required? The answers determine which forms of validity need evidence.
+- Always establish content and external validity; add criterion validity when the measured object differs from the claimed criterion; add construct validity when a construct is involved.
+- Frame validity as iterative, not a checklist—valid claims can become invalid as contexts or use cases change.
+
+*constructs:*
+- Distinguish criteria (directly measurable, e.g., "accuracy on physics MCQs") from constructs (abstract, e.g., "reasoning") before selecting evidence types.
+- When validating a construct claim, require structural validity (does the test's internal structure match the construct's subskills?), convergent validity (correlation with other measures of the same construct), and discriminant validity (no correlation with unrelated constructs).
+- Push for explicit nomological networks linking AI constructs to observables; without them, construct claims risk being unfounded.
+
+*generalization:*
+- External validity must be established whenever the claim must hold in a context different from the measurement context—test across formats, populations, and settings.
+- The conceptual gap between what is measured and what is claimed determines the standard of evidence required; broader gaps demand stronger justification.
 
 **Caveats:**
-- The framework is conceptual and illustrated with only two case studies; it is not empirically validated as a whole.
-- Nomological networks for AI constructs are described as necessary but largely absent, making construct validity assessment currently very difficult in practice.
-- Validity scoring in the case studies is subjective and explicitly described as iterative, not binary.
+- The five validity forms are selected as "most relevant"; other forms (e.g., face validity) exist and may matter in specific contexts.
+- The framework is theoretical; the case studies illustrate application but do not empirically validate the framework itself.
+- The authors acknowledge nomological networks for AI constructs are largely missing, making construct validity difficult to establish in practice.
 
-**Other categories:**
-- **generalization:** External validity is treated as one of five core forms, covering whether results generalize across populations, settings, and time; risks include sample bias, temporal variability, and unrealistic testing conditions.
-- **measurement-models:** Factor analysis and IRT are mentioned as tools for establishing structural and convergent validity, but not developed in depth.
-- **reliability:** Noted only briefly—high measurement error undermines convergent validity.
+**Category changes:** Added generalization; the paper substantially covers external validity and inferential gaps from scores to broader claims.

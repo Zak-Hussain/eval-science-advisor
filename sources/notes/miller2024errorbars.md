@@ -1,33 +1,32 @@
-# Adding Error Bars to Evals (Miller et al., 2024)
+# Adding Error Bars to Evals (Miller, 2024)
 
-**What kind of evidence:** Methods paper with statistical theory and worked examples.
+**What kind of evidence:** Methods paper (statistical theory and formulas applied to LLM evals).
 
 **Key claims:**
-- Evals should be treated as experiments drawing from a hypothetical super-population of questions; standard errors are computable via the Central Limit Theorem (SE = sqrt(Var(s)/n)) without bootstrapping.
-- Clustered standard errors for evals with grouped questions (e.g., shared passages, translated items) can be over 3× larger than naive standard errors; failing to cluster yields falsely precise estimates.
-- Paired differences between models on the same questions reduce variance proportional to score correlation; a correlation of 0.5 cuts variance by roughly one third.
-- Resampling answers K times and analyzing next-token probabilities both reduce conditional variance; resampling yields diminishing returns once E[σ²]/K ≪ Var(x).
-- Adjusting sampling temperature to reduce variance is counterproductive—it can inject bias and increase variance of conditional means.
-- Power analysis formulas relate sample size to minimum detectable effect; worked examples suggest new evals need ≥1,000 questions for good signaling.
+- Evals should be analyzed as experiments sampling from an unseen super-population, requiring standard errors and confidence intervals rather than just point estimates.
+- Naive standard errors underestimate uncertainty when questions are clustered (e.g., shared passages or translations); clustered standard errors can be over 3x larger.
+- Paired analysis (computing question-level differences between two models) reduces estimator variance compared to unpaired analysis, leveraging the correlation of question difficulty across models.
+- Variance can be reduced by resampling answers or using next-token probabilities instead of sampled outputs for non-chain-of-thought evals.
+- Power analysis formulas allow practitioners to calculate required sample sizes or the Minimum Detectable Effect (MDE) between two models.
 
 **What the advisor should take from it:**
-
 *reliability:*
-- Report standard errors alongside mean scores; use CLT-based SEs, not bootstrapping, for standard cases. For fractional scores (e.g., F1), use CLT-based SE, not the Bernoulli formula, which is conservative.
-- When questions share a passage or translation, compute clustered standard errors; report cluster counts alongside question counts.
-- Reduce score variance by resampling answers or using next-token probabilities; do not adjust sampling temperature for this purpose.
-- When comparing two models, compute paired differences on the same questions rather than comparing population-level summary statistics.
+- Compute standard errors using the Central Limit Theorem. For fractional scores (e.g., F1), use the general CLT formula rather than the Bernoulli formula, which can be overly conservative.
+- Use clustered standard errors when questions are drawn in related groups (e.g., DROP, RACE, MGSM) to account for intra-cluster correlation, as failure to do so makes results appear much more precise than they are.
+- Reduce variance by resampling answers per question (until conditional variance is much smaller than question-level variance) or by analyzing next-token probabilities. Do not adjust sampling temperature solely to reduce variance, as this can shift or increase the variance of conditional means.
 
 *generalization:*
-- Frame eval questions as draws from a super-population to justify inference about underlying capability beyond specific items.
-- Use the sample-size/power formula (Equation 9) to determine whether an eval or subsample can detect a target effect size δ, given α, β, and variance estimates from prior data.
-- When fixed, compute the Minimum Detectable Effect to judge whether the eval is worth running.
+- Conceptualize eval questions as a random sample from a hypothetical super-population to justify generalizing from specific eval items to broader model capabilities.
+- Report standard errors alongside mean scores, and use paired question-level differences with confidence intervals when comparing models, as this provides a "free" variance reduction.
+- Use the provided power analysis formulas to determine if an eval has enough questions to reliably detect a hypothesized difference between models (Minimum Detectable Effect), preventing wasted effort on underpowered evals.
+
+*scoring:*
+- For non-chain-of-thought evals (e.g., multiple choice), score by analyzing the next-token probability of the correct answer rather than sampling outputs, which eliminates conditional variance entirely.
 
 **Caveats:**
-- The super-population assumption is a modeling fiction; real eval questions are curated, not randomly drawn.
-- Power analysis requires prior data to estimate variance components (ω², σ²_A, σ²_B); these may not be available for novel constructs.
-- Worked examples use simplified assumptions (e.g., uniform difficulty distributions).
+- The super-population assumption—that questions are drawn randomly from an infinite pool—may not hold for highly curated or fixed eval datasets.
+- Worked examples for variance reduction and power analysis rely on simplified assumptions (e.g., uniformly distributed question difficulty, binary scores) that may not reflect all real-world eval score distributions.
+- Applying clustered standard errors and power analysis requires prior data to estimate variance components; without this, calculations are purely theoretical.
 
-**Other categories:**
-- *scoring:* Recommends next-token probabilities over sampled outputs for variance reduction; notes Bernoulli SE is inappropriate for fractional scores like F1.
-- *elicitation:* Warns that changing sampling temperature alters model behavior and should not be used as a variance-reduction tool.
+**Category changes:**
+Added scoring: it introduces next-token probability analysis as a scoring method to reduce variance; dropped elicitation: only mentioned in passing.
