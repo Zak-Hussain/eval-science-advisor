@@ -10,6 +10,8 @@
 - Aggregate performance on “general” benchmarks can mask disparate failures on minority subgroups, enabling unsafe deployment justification.
 - The Common Task Framework was built for tightly scoped practical tasks; extending it to abstract “general” performance subverts its purpose.
 
+**What the advisor should take from it:**
+
 *constructs:*
 - Define constructs narrowly before benchmarking; “general-purpose” capability labels are too vague to operationalize in a single dataset.
 - Avoid merging distinct constructs (e.g., linguistic form vs. world knowledge) under one benchmark without justifying why they should be measured together.
