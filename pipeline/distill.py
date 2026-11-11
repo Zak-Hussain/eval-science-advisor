@@ -6,7 +6,7 @@ import pymupdf
 from tqdm import tqdm
 
 ROOT = Path(__file__).resolve().parent.parent
-SKILL_DIR = ROOT / "skills" / "science-of-evals"   # the folder users install
+SKILL_DIR = ROOT / "science-of-evals"   # the folder users install
 
 # The advisor's seven categories (see SPEC.md). Notes may use any of them, not only a paper's registry tags.
 CATEGORIES = ["constructs", "validity", "elicitation", "scoring", "reliability", "measurement-models", "generalization"]
@@ -18,7 +18,7 @@ MAX_TOKENS = 8000
 CLIENT = InferenceClient()   # reads HF_TOKEN from your environment
 
 # --- What to run: edit these, then press play ----------------------------------
-STEP = "notes"   # "notes", "references" or "skill"
+STEP = "references"   # "notes", "references" or "skill"
 ONLY = None     # None = everything; or one registry id (notes) / one category (references)
 # ------------------------------------------------------------------------------
 
@@ -101,8 +101,7 @@ def make_reference(category: str, entries: list[dict]) -> None:
     section -> SKILL_DIR/references/<category>.md
 
     The notes decide which papers belong to a category, not the registry tags (those were a
-    first guess made without the full text). Mismatches are printed so the registry can be fixed.
-    The file is rebuilt from scratch each run, so edit the notes, not the reference file.
+    first guess made without the full text). The file is rebuilt from scratch each run, so edit the notes, not the reference file.
     """
     sections = []
     for entry in entries:   # registry order
@@ -115,13 +114,8 @@ def make_reference(category: str, entries: list[dict]) -> None:
             advice = advice_by_category(note)
         except ValueError as error:
             raise ValueError(f"{note_path.name}: {error}") from error
-        tagged = category in entry["categories"]
         if category not in advice:
-            if tagged:
-                print(f"  Note: {entry['id']} is tagged {category} in the registry, but its note has no section for it")
             continue
-        if not tagged:
-            print(f"  Note: {entry['id']} has a {category} section, but isn't tagged {category} in the registry")
 
         heading = note.splitlines()[0].lstrip("#").strip()   # e.g. "Adding Error Bars to Evals (Miller, 2024)"
         sections.append(f"## {heading}\n\n{advice[category]}")
