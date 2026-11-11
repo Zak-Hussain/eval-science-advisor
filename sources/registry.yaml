@@ -1,48 +1,265 @@
-- title: "Measuring what Matters: Construct Validity in Large Language Model Benchmarks"
-  url: https://arxiv.org/abs/2511.04703
-  published: 2025-11-03
+# Source registry for eval-science-advisor
+#
+# Categories (an entry's first category is its primary one):
+#   constructs          What is being measured: capabilities, propensities, dispositions, defining concepts
+#   validity            Whether scores support the intended claims: validity arguments, evidence types, threats
+#   reliability         Whether scores are consistent: across runs, prompts, formats, items; response biases; label noise
+#   elicitation         Getting the behaviour you mean to measure: prompting/scaffolding/fine-tuning, controls, sandbagging, eval awareness
+#   scoring             Turning outputs into scores: metrics, rubrics, LLM judges, human raters
+#   measurement-models  From item responses to construct scores: IRT, factor analysis, general scales, adaptive/efficient testing
+#   generalization      From scores to claims beyond the test: uncertainty for eval comparisons, coverage, prediction to deployment and future models
 
-- title: "Large Language Model Psychometrics: A Systematic Review of Evaluation, Validation, and Enhancement"
-  url: https://arxiv.org/abs/2505.08245
-  published: 2025-05-13
+# --- constructs ----------------------------------------------------------------
 
-- title: "Position: Evaluating Generative AI Systems Is a Social Science Measurement Challenge"
+- id: wallach2025position
+  title: "Position: Evaluating Generative AI Systems Is a Social Science Measurement Challenge"
+  authors: "Wallach, H., Desai, M., Cooper, A. F., et al."
   url: https://arxiv.org/abs/2502.00561
   published: 2025-02-01
+  categories: [constructs, validity]
+  # ICML 2025 acceptance not confirmed (arXiv page lists no venue)
 
-- title: "Apparent Psychological Profiles of Large Language Models are Largely a Measurement Artifact"
-  url: https://arxiv.org/abs/2606.20205
-  published: 2026-06-18
-
-- title: "What Is It for a Machine Learning Model to Have a Capability?"
-  url: https://arxiv.org/abs/2405.08989
-  published: 2024-05-14
-
-- title: "Measuring What AI Systems Might Do: Towards A Measurement Science in AI"
+- id: voudouris2026measuring
+  title: "Measuring What AI Systems Might Do: Towards A Measurement Science in AI"
+  authors: "Voudouris, K., Thalmann, M., Kipnis, A., et al."
   url: https://arxiv.org/abs/2603.00063
   published: 2026-02-10
+  categories: [constructs, measurement-models, elicitation, generalization]
 
-- title: "Item Response Theory for AI Safety"
-  url: https://arxiv.org/abs/2608.05086
-  published: 2026-08-05
+- id: harding2024capability
+  title: "What Is It for a Machine Learning Model to Have a Capability?"
+  authors: "Harding, J., Sharadin, N."
+  url: https://arxiv.org/abs/2405.08989
+  published: 2024-05-14
+  categories: [constructs, elicitation]
+  # forthcoming in British Journal for the Philosophy of Science (per arXiv page)
 
-- title: "metabench: A Sparse Benchmark of Reasoning and Knowledge in Large Language Models"
-  url: https://arxiv.org/abs/2407.12844
-  published: 2024-07-04
+- id: raji2021everything
+  title: "AI and the Everything in the Whole Wide World Benchmark"
+  authors: "Raji, I. D., Bender, E. M., Paullada, A., et al."
+  url: https://arxiv.org/abs/2111.15366
+  published: 2021
+  categories: [constructs, validity]
+  # venue (NeurIPS 2021 Datasets & Benchmarks) not verified
 
-- title: "Capabilities Ain't All You Need: Measuring Propensities in AI"
-  url: https://arxiv.org/abs/2602.18182
-  published: 2026-02-20
+# --- validity ------------------------------------------------------------------
 
-- title: "General Scales Unlock AI Evaluation with Explanatory and Predictive Power"
+- id: messick1995validity
+  title: "Validity of psychological assessment: Validation of inferences from persons' responses and performances as scientific inquiry into score meaning"
+  authors: "Messick, S."
+  url: https://doi.org/10.1037/0003-066X.50.9.741
+  published: 1995
+  categories: [validity, constructs]
+  # American Psychologist 50(9):741-749
+
+- id: kane2013validating
+  title: "Validating the Interpretations and Uses of Test Scores"
+  authors: "Kane, M. T."
+  url: https://doi.org/10.1111/jedm.12000
+  published: 2013
+  categories: [validity, generalization]
+  # Journal of Educational Measurement 50(1):1-73. 73 pages; excerpts (roughly sections 1-5) suffice
+
+- id: salaudeen2025measurement
+  title: "Measurement to Meaning: A Validity-Centered Framework for AI Evaluation"
+  authors: "Salaudeen, O., Reuel, A., Ahmed, A., et al."
+  url: https://arxiv.org/abs/2505.10573
+  published: 2025-05-13
+  categories: [validity, constructs]
+  # NeurIPS 2025 venue seen only in search results, not confirmed
+
+- id: bean2025measuring
+  title: "Measuring what Matters: Construct Validity in Large Language Model Benchmarks"
+  authors: "Bean, A. M., Kearns, R. O., Romanou, A., et al."
+  url: https://arxiv.org/abs/2511.04703
+  published: 2025-11-03
+  categories: [validity, constructs, scoring]
+
+- id: xu2024contamination
+  title: "Benchmark Data Contamination of Large Language Models: A Survey"
+  authors: "Xu, C., Guan, S., Greene, D., et al."
+  url: https://arxiv.org/abs/2406.04244
+  published: 2024-06-06
+  categories: [validity]
+  # no newer (2025-2026) contamination survey was checked; may be superseded
+
+# --- elicitation ---------------------------------------------------------------
+
+- id: apollo2024science
+  title: "We Need A 'Science of Evals'"
+  authors: "Apollo Research"
+  url: https://www.apolloresearch.ai/science/we-need-a-science-of-evals
+  published: 2024-01-22
+  categories: [elicitation, validity]
+  # cross-cutting framing piece; blog post, not peer-reviewed
+
+- id: hagendorff2026machine
+  title: "Machine psychology for language models"
+  authors: "Hagendorff, T., Dasgupta, I., Binz, M., et al."
+  url: https://doi.org/10.1126/sciadv.aec1912
+  published: 2026-10-28
+  categories: [elicitation, constructs, validity]
+  # Science Advances 12(44):eaec1912 (online 2026-10-28; issue 2026-10-30). Earlier version: arXiv:2303.13988 ("Machine Psychology")
+
+- id: greenblatt2024password
+  title: "Stress-Testing Capability Elicitation With Password-Locked Models"
+  authors: "Greenblatt, R., Roger, F., Krasheninnikov, D., et al."
+  url: https://arxiv.org/abs/2405.19550
+  published: 2024-05-29
+  categories: [elicitation]
+
+- id: metr2024elicitation
+  title: "Guidelines for capability elicitation"
+  authors: "METR"
+  url: https://metr.org/blog/2024-03-15-guidelines-for-capability-elicitation/
+  published: 2024-03-15
+  categories: [elicitation]
+  # practitioner guidance; a newer METR revision (2025-2026) was not checked
+
+- id: needham2025awareness
+  title: "Large Language Models Often Know When They Are Being Evaluated"
+  authors: "Needham, J., Edkins, G., Pimpale, G., et al."
+  url: https://arxiv.org/abs/2505.23836
+  published: 2025-05-28
+  categories: [elicitation, validity]
+
+# --- scoring -------------------------------------------------------------------
+
+- id: zheng2023judging
+  title: "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena"
+  authors: "Zheng, L., Chiang, W.-L., Sheng, Y., et al."
+  url: https://arxiv.org/abs/2306.05685
+  published: 2023-06-09
+  categories: [scoring]
+  # NeurIPS 2023 Datasets & Benchmarks
+
+- id: schaeffer2023mirage
+  title: "Are Emergent Abilities of Large Language Models a Mirage?"
+  authors: "Schaeffer, R., Miranda, B., Koyejo, S."
+  url: https://arxiv.org/abs/2304.15004
+  published: 2023-04-28
+  categories: [scoring, constructs, generalization]
+  # NeurIPS 2023
+
+- id: guerdan2025indeterminacy
+  title: "Validating LLM-as-a-Judge Systems under Rating Indeterminacy"
+  authors: "Guerdan, L., Barocas, S., Holstein, K., et al."
+  url: https://arxiv.org/abs/2503.05965
+  published: 2025-03-07
+  categories: [scoring, validity, reliability]
+  # NeurIPS 2025
+
+- id: plank2022variation
+  title: "The 'Problem' of Human Label Variation: On Ground Truth in Data, Modeling and Evaluation"
+  authors: "Plank, B."
+  url: https://arxiv.org/abs/2211.02570
+  published: 2022-11-04
+  categories: [scoring, reliability]
+  # EMNLP 2022 main (2022.emnlp-main.731)
+
+# --- reliability ---------------------------------------------------------------
+
+- id: sclar2023formatting
+  title: "Quantifying Language Models' Sensitivity to Spurious Features in Prompt Design or: How I learned to start worrying about prompt formatting"
+  authors: "Sclar, M., Choi, Y., Tsvetkov, Y., et al."
+  url: https://arxiv.org/abs/2310.11324
+  published: 2023-10-17
+  categories: [reliability, elicitation]
+  # ICLR 2024 (per arXiv comments field)
+
+- id: heineman2025signal
+  title: "Signal and Noise: A Framework for Reducing Uncertainty in Language Model Evaluation"
+  authors: "Heineman, D., Hofmann, V., Magnusson, I., et al."
+  url: https://arxiv.org/abs/2508.13144
+  published: 2025-08-18
+  categories: [reliability, measurement-models, generalization]
+  # NeurIPS 2025 poster (per conference listing)
+
+- id: northcutt2021labelerrors
+  title: "Pervasive Label Errors in Test Sets Destabilize Machine Learning Benchmarks"
+  authors: "Northcutt, C. G., Athalye, A., Mueller, J."
+  url: https://arxiv.org/abs/2103.14749
+  published: 2021
+  categories: [reliability, validity]
+  # NeurIPS 2021 Datasets & Benchmarks
+
+- id: meyer2026profiles
+  title: "Apparent Psychological Profiles of Large Language Models are Largely a Measurement Artifact"
+  authors: "Meyer, J., Garcia, D., Wulff, D. U."
+  url: https://arxiv.org/abs/2606.20205
+  published: 2026-06-18
+  categories: [reliability, validity, constructs]
+
+# --- measurement-models --------------------------------------------------------
+
+- id: rodriguez2021informative
+  title: "Evaluation Examples are not Equally Informative: How should that change NLP Leaderboards?"
+  authors: "Rodriguez, P., Barrow, J., Hoyle, A. M., et al."
+  url: https://doi.org/10.18653/v1/2021.acl-long.346
+  published: 2021
+  categories: [measurement-models, reliability]
+  # ACL-IJCNLP 2021
+
+- id: maiapolo2024tinybenchmarks
+  title: "tinyBenchmarks: evaluating LLMs with fewer examples"
+  authors: "Maia Polo, F., Weber, L., Choshen, L., et al."
+  url: https://arxiv.org/abs/2402.14992
+  published: 2024
+  categories: [measurement-models, reliability]
+  # venue (ICML 2024) not verified
+
+- id: burnell2023structure
+  title: "Revealing the structure of language model capabilities"
+  authors: "Burnell, R., Hao, H., Conway, A. R. A., et al."
+  url: https://arxiv.org/abs/2306.10062
+  published: 2023
+  categories: [measurement-models, constructs]
+  # venue not verified
+
+- id: zhou2025generalscales
+  title: "General Scales Unlock AI Evaluation with Explanatory and Predictive Power"
+  authors: "Zhou, L., Pacchiardi, L., Martínez-Plumed, F., et al."
   url: https://arxiv.org/abs/2503.06378
   published: 2025-03-09
+  categories: [measurement-models, generalization, constructs]
 
-- title: "Do Large Language Model Benchmarks Test Reliability?"
-  url: https://arxiv.org/abs/2502.03461
-  published: 2025-02-05
+# --- generalization ------------------------------------------------------------
 
-- title: "When Judgment Becomes Noise: How Design Failures in LLM Judge Benchmarks Silently Undermine Validity"
-  url: https://arxiv.org/abs/2509.20293
-  published: 2025-09-24
+- id: miller2024errorbars
+  title: "Adding Error Bars to Evals: A Statistical Approach to Language Model Evaluations"
+  authors: "Miller, E."
+  url: https://arxiv.org/abs/2411.00640
+  published: 2024-11-01
+  categories: [generalization, reliability]
 
+- id: burnell2023reporting
+  title: "Rethink reporting of evaluation results in AI"
+  authors: "Burnell, R., Schellaert, W., Burden, J., et al."
+  url: https://doi.org/10.1126/science.adf6369
+  published: 2023-04-14
+  categories: [generalization, constructs, validity]
+  # Science 380(6641):136-138
+
+- id: ruan2024observational
+  title: "Observational Scaling Laws and the Predictability of Language Model Performance"
+  authors: "Ruan, Y., Maddison, C. J., Hashimoto, T."
+  url: https://arxiv.org/abs/2405.10938
+  published: 2024-05-17
+  categories: [generalization, measurement-models]
+  # NeurIPS 2024 (per conference listing; arXiv page shows no venue)
+
+- id: liao2021learning
+  title: "Are We Learning Yet? A Meta Review of Evaluation Failures Across Machine Learning"
+  authors: "Liao, T., Taori, R., Raji, I. D., et al."
+  url: https://datasets-benchmarks-proceedings.neurips.cc/paper/2021/hash/757b505cfd34c64c85ca5b5690ee5293-Abstract-round2.html
+  published: 2021
+  categories: [generalization, validity]
+  # NeurIPS 2021 Datasets & Benchmarks
+
+- id: bowyer2025clt
+  title: "Position: Don't Use the CLT in LLM Evals With Fewer Than a Few Hundred Datapoints"
+  authors: "Bowyer, S., Aitchison, L., Ivanova, D. R."
+  url: https://arxiv.org/abs/2503.01747
+  published: 2025
+  categories: [generalization, reliability]
+  # ICML 2025, PMLR 267:81143-81184 (https://proceedings.mlr.press/v267/bowyer25a.html)

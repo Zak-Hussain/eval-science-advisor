@@ -218,3 +218,12 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# macOS
+.DS_Store
+
+# Downloaded paper PDFs
+/sources/pdfs/
+
+/todo.md
+/SPEC.md
