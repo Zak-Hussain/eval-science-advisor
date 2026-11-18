@@ -27,7 +27,6 @@ ROOT = Path(__file__).resolve().parent.parent
 
 _ARXIV_ID_RE = re.compile(r"arxiv\.org/(?:abs|pdf)/(\d{4}\.\d{4,5})(?:v(\d+))?")
 
-# ------------------------------------------------------------------------------
 
 def parse_arxiv_url(url: str) -> tuple[str, int | None]:
 
@@ -58,7 +57,6 @@ def download_pdf(arxiv_id: str, version: int, out_dir: Path) -> Path:
     out_dir.mkdir(parents=True, exist_ok=True)
     out_path.write_bytes(urllib.request.urlopen(url).read())
     return out_path
-
 
 
 def fetch_arxiv_paper(url: str, out_dir: Path) -> dict: 
@@ -99,8 +97,3 @@ for entry in progress:
 
 # Save manifest 
 (ROOT / "sources" / "manifest.yaml").write_text(yaml.safe_dump(manifest, sort_keys=False))
-
-
-
-
-    

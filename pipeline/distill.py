@@ -5,7 +5,7 @@
   references  notes -> science-of-evals/references/<category>.md, with no model. Each file
               collects every note's advice for that category and is rebuilt from scratch on
               every run, so edit the notes, not the reference files.
-  skill       reference files -> SKILL.md.draft, for you to review before replacing SKILL.md.
+  skill       reference files -> SKILL.md.draft, for review before replacing SKILL.md.
               Not written yet (make_skill is a TODO).
 
 Set STEP (and ONLY, to run one paper or category) below, then run the file. The notes step reads
@@ -25,12 +25,12 @@ from tqdm import tqdm
 ROOT = Path(__file__).resolve().parent.parent
 SKILL_DIR = ROOT / "science-of-evals"   # the folder users install
 
-# The advisor's seven categories (see SPEC.md). Notes may use any of them, not only a paper's registry tags.
+# The advisor's seven categories. Notes may use any of them, not only a paper's registry tags.
 CATEGORIES = ["constructs", "validity", "elicitation", "scoring", "reliability", "measurement-models", "generalization"]
 
 # Pin both the model and the provider (the part after ":"). Different providers can serve the
 # same open-weights model with different settings, so pinning the provider keeps runs comparable.
-MODEL = "zai-org/GLM-5.2:deepinfra"   # TODO: choose your model and provider
+MODEL = "zai-org/GLM-5.2:deepinfra"   
 MAX_TOKENS = 8000
 CLIENT = InferenceClient()   # reads HF_TOKEN from your environment
 
@@ -164,13 +164,14 @@ if STEP == "notes":
 
     progress = tqdm(entries, desc="Taking notes", unit="paper")
     for entry in progress:
-        print(f"Processing {entry["id"]}")
-
+        
         if ONLY and entry["id"] != ONLY:
             continue
         if entry["id"] not in manifest:
             print(f"Skipping {entry['id']}: no PDF in the manifest yet")
             continue
+
+        print(f"Processing {entry["id"]}")
         make_note(entry, ROOT / manifest[entry["id"]]["pdf_path"])
 
 elif STEP == "references":
