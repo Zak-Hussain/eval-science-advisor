@@ -6,7 +6,7 @@ Eval Science Advisor is an agent skill. It helps you design, audit and interpret
 
  It follows the open [Agent Skills](https://agentskills.io/home) standard. It works with any compatible agent, whichever model provider you use.
 
-**Status:** early development. 
+**Status:** early development (yet to be evaluated!). 
 
 ---
 
@@ -15,10 +15,13 @@ Eval Science Advisor is an agent skill. It helps you design, audit and interpret
 Ask your assistant questions like these, and the skill will apply measurement-science reasoning:
 
 - "I'm building a benchmark for agentic coding. What exactly should it measure?"
-- "Is my LLM judge good enough to replace human raters?"
-- "Model A scores 2 points higher than model B. Is that a real difference?"
+- "I'm measuring refusal rate on self-harm prompts. Is that the right metric?"
+- "I changed the system prompt and the safety score went up. Can I say the change caused it?"
+- "How do I check my LLM judge against human raters before I trust its scores?"
+- "Model A scores 2 points higher than model B, but they were run with different system prompts. Is that a real difference?"
 - "How many items do I need, and how should I report error bars?"
-- "Could contamination or prompt sensitivity explain these results?"
+- "Could contamination, saturation or prompt sensitivity explain these results?"
+- "My model is 97% safe on single-turn prompts. Does that tell me how it behaves in long conversations or in production?"
 - "Review this eval paper. Do the scores support its claims?"
 
 It does not help with general statistics, eval harnesses and infrastructure, or the subject-matter content of domain benchmarks.
