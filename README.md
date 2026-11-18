@@ -8,6 +8,8 @@ Eval Science Advisor is an agent skill. It is meant to help you design, audit an
 
 **Status:** early development (yet to be evaluated!). 
 
+> **AI use statement:** Most of the code in this repo was written with Claude Code (Claude Opus 5.5). A human domain expert led and directed the work. LLMs also produce parts of the skill's content: they expanded the source list, wrote the per-paper notes and drafted `SKILL.md`. See [How it's built](#how-its-built) for which model did each step.
+
 ---
 
 ## What it is meant to help with
