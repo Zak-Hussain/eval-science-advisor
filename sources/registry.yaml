@@ -83,6 +83,14 @@
   categories: [validity]
   # no newer (2025-2026) contamination survey was checked; may be superseded
 
+- id: anthropic2026safety
+  title: "Building strong safety evaluations"
+  authors: "Appel, R., Frondorf, E., Hadfield, J., et al. (Anthropic)"
+  url: https://www.anthropic.com/research/building-strong-safety-evaluations
+  published: 2026-11-13
+  categories: [validity, constructs, scoring, generalization]
+  # practitioner guidance; blog post, not peer-reviewed. Covers construct validity for safety evals, multi-turn rubric-scored designs, grader calibration against human labels, preregistration, uncertainty reporting
+
 # --- elicitation ---------------------------------------------------------------
 
 - id: apollo2024science
