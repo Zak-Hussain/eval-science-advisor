@@ -1,3 +1,20 @@
+"""Download the arXiv papers in sources/registry.yaml as PDFs, and record which versions were fetched.
+
+Every registry entry with an arxiv.org URL is downloaded to sources/pdfs/<id>v<version>.pdf.
+A URL with a version (e.g. .../abs/2405.10938v2) gets that version; a URL without one gets the
+latest version, as reported by the arXiv API. Entries without an arXiv URL (blog posts, journal
+articles) are skipped, so those have no PDF.
+
+sources/manifest.yaml is then rewritten from scratch, mapping each registry id to its arXiv id,
+version, PDF path and fetch date. pipeline/distill.py and evaluation/plagarism_check.py both
+read it to find the PDFs.
+
+Each run downloads every paper again, pausing 3 seconds between requests as arXiv asks of scripts.
+sources/pdfs/ is gitignored, so the PDFs stay out of the repo.
+
+Run it from anywhere: python pipeline/fetch_papers.py
+"""
+
 from pathlib import Path
 import re
 import urllib.request

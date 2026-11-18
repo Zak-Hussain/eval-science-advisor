@@ -12,7 +12,7 @@ Headings (mostly paper titles) and short "quoted" spans (attributed quotations) 
 Every passage is checked against every paper, not only the paper its note is about, because the
 reference files and SKILL.md draw on many papers.
 
-Run it from anywhere: python evaluation/plagarism_check.py (or press play)
+Run it from anywhere: python evaluation/plagarism_check.py 
 """
 
 from collections import defaultdict

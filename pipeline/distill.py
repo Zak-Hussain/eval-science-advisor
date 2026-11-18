@@ -1,3 +1,20 @@
+"""Distil the source papers into the science-of-evals skill, in three passes.
+
+  notes       one paper's PDF -> sources/notes/<id>.md, written by the model. A paper that
+              already has a note is skipped, so delete a note to regenerate it.
+  references  notes -> science-of-evals/references/<category>.md, with no model. Each file
+              collects every note's advice for that category and is rebuilt from scratch on
+              every run, so edit the notes, not the reference files.
+  skill       reference files -> SKILL.md.draft, for you to review before replacing SKILL.md.
+              Not written yet (make_skill is a TODO).
+
+Set STEP (and ONLY, to run one paper or category) below, then run the file. The notes step reads
+the PDFs listed in sources/manifest.yaml, so run pipeline/fetch_papers.py first. It also calls
+MODEL through the Hugging Face Inference API, so HF_TOKEN must be set in your environment.
+
+Run it from anywhere: python pipeline/distill.py
+"""
+
 from pathlib import Path
 import re
 import yaml
@@ -17,7 +34,7 @@ MODEL = "zai-org/GLM-5.2:deepinfra"   # TODO: choose your model and provider
 MAX_TOKENS = 8000
 CLIENT = InferenceClient()   # reads HF_TOKEN from your environment
 
-# --- What to run: edit these, then press play ----------------------------------
+# --- What to run: edit these ----------------------------------
 STEP = "references"   # "notes", "references" or "skill"
 ONLY = None     # None = everything; or one registry id (notes) / one category (references)
 # ------------------------------------------------------------------------------
