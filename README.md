@@ -47,7 +47,7 @@ The prompts for the LLM steps are in [`pipeline/prompts/`](pipeline/prompts/).
 ## Next steps: 
 
 1. Reconsider reference categories.
-2. Expand [`pipeline/fetch_papers.py`](pipeline/fetch_papers.py) to non-arXiv, licence-permitting papers. 
+2. Expand [`pipeline/fetch_papers.py`](pipeline/fetch_papers.py) to non-arXiv, licence-permitting papers. Update `evaluation/plagarism_check.py` to include additional sources in check.  
 2. Expand [`sources/registry.yaml`](sources/registry.yaml), make the search more systematic. 
 3. Use a more capable model for the pdf -> notes distillation. 
 4. Evaluate! 
