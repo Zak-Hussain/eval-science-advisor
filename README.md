@@ -1,6 +1,6 @@
 # Eval Science Advisor
 
-**An open-source agent skill that brings measurement science to AI evaluation.**
+**An open-source agent skill that applies measurement science to AI evaluation.**
 
 Eval Science Advisor is an agent skill. It helps you design, audit and interpret AI evaluations, using the research on measurement in AI evaluation. Its advice covers seven areas: constructs, validity, elicitation, scoring, reliability, measurement models and generalisation. Each piece of advice cites the papers it draws on.
 
