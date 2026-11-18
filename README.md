@@ -48,15 +48,14 @@ The skill is distilled from a curated set of papers:
 
 The prompts for the LLM steps are in [`pipeline/prompts/`](pipeline/prompts/).
 
-
-## Next steps 
+## Next steps
 
 1. Reconsider reference categories.
-2. Expand [`pipeline/fetch_papers.py`](pipeline/fetch_papers.py) to non-arXiv, licence-permitting papers. Update `evaluation/plagarism_check.py` to include additional sources in check.  
-3. Expand [`sources/registry.yaml`](sources/registry.yaml), make the search more systematic. 
-4. Use a more capable model for the pdf -> notes distillation. 
-5. Evaluate! 
-
+2. Fix [`pipeline/prompts/paper_note.md`](pipeline/prompts/paper_note.md) to make sure paper titles are not abreviated/paraphrased. 
+3. Expand [`pipeline/fetch_papers.py`](pipeline/fetch_papers.py) to non-arXiv, licence-permitting papers. Update `evaluation/plagarism_check.py` to include additional sources in check.
+4. Expand [`sources/registry.yaml`](sources/registry.yaml), make the search more systematic.
+5. Use a more capable model for the pdf -> notes distillation.
+6. Evaluate!
 
 ## License
 
