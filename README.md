@@ -1,18 +1,18 @@
 # Eval Science Advisor
 
-**An open-source agent skill that applies measurement science to AI evaluation.**
+**An open-source agent skill for applying measurement science to AI evaluation.**
 
-Eval Science Advisor is an agent skill. It helps you design, audit and interpret AI evaluations, using the research on measurement in AI evaluation. Its advice covers seven areas: constructs, validity, elicitation, scoring, reliability, measurement models and generalisation. Each piece of advice cites the papers it draws on.
+Eval Science Advisor is an agent skill. It is meant to help you design, audit and interpret AI evaluations, using the research on measurement in AI evaluation. Its advice is intended to cover seven areas: constructs, validity, elicitation, scoring, reliability, measurement models and generalisation. The skill instructs the agent to cite the papers each piece of advice draws on.
 
- It follows the open [Agent Skills](https://agentskills.io/home) standard. It works with any compatible agent, whichever model provider you use.
+ It follows the open [Agent Skills](https://agentskills.io/home) standard, so it should work with any compatible agent, whichever model provider you use.
 
 **Status:** early development (yet to be evaluated!). 
 
 ---
 
-## What it helps with
+## What it is meant to help with
 
-Ask your assistant questions like these, and the skill will apply measurement-science reasoning:
+The skill is designed to apply measurement-science reasoning to questions like these:
 
 - "I'm building a benchmark for agentic coding. What exactly should it measure?"
 - "I'm measuring refusal rate on self-harm prompts. Is that the right metric?"
@@ -24,7 +24,7 @@ Ask your assistant questions like these, and the skill will apply measurement-sc
 - "My model is 97% safe on single-turn prompts. Does that tell me how it behaves in long conversations or in production?"
 - "Review this eval paper. Do the scores support its claims?"
 
-It does not help with general statistics, eval harnesses and infrastructure, or the subject-matter content of domain benchmarks.
+It is not meant to help with general statistics, eval harnesses and infrastructure, or the subject-matter content of domain benchmarks.
 
 ## Install
 
