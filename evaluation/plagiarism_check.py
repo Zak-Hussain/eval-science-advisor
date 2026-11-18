@@ -31,7 +31,7 @@ MD_FILES = (
     + [ROOT / "science-of-evals" / "SKILL.md"]
 )
 
-# --- Thresholds: edit these, then press play -----------------------------------
+# --- Thresholds: edit these -----------------------------------
 N = 5                 # words per shingle
 VERBATIM_RUN = 12     # flag a passage sharing at least this many consecutive words with one paper
 CLOSE_OVERLAP = 0.5   # flag a passage when at least this share of its shingles appear in one paper...
