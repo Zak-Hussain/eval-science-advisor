@@ -35,11 +35,11 @@ The skill is the [`science-of-evals/`](science-of-evals/) folder.
 
 The skill is distilled from a curated set of papers:
 
-1. **Registry.** [`sources/registry.yaml`](sources/registry.yaml) lists the sources and tags each one with categories. It started as about 10 papers chosen by a domain expert. Claude Opus 5.5 then expanded it to 31 sources, using the `deep-research` skill.
+1. **Registry.** [`sources/registry.yaml`](sources/registry.yaml) lists the sources and tags each one with categories. It started as about 10 papers chosen by a domain expert. Claude Opus 5.5 then expanded it to 31 sources, using the `/deep-research` skill.
 2. **Fetching.** [`pipeline/fetch_papers.py`](pipeline/fetch_papers.py) downloads the PDFs from arXiv and records the versions it used in [`sources/manifest.yaml`](sources/manifest.yaml). Only the 23 sources on arXiv are fetched and distilled so far.
 3. **Notes.** [`pipeline/distill.py`](pipeline/distill.py) uses an LLM to write one note per paper ([`sources/notes/`](sources/notes/)). For now the notes are written by `zai-org/GLM-5.2` (served by DeepInfra). Frontier-model credits would allow better notes; we are looking for funding for them.
 4. **References.** The notes are grouped into one reference file per category ([`science-of-evals/references/`](science-of-evals/references/)). The grouping is currently hard-coded. An LLM could do this step instead and add more context.
-5. **Skill.** Claude Fable 5.2 wrote [`SKILL.md`](science-of-evals/SKILL.md) from the reference files, using the `skill-creator` skill.
+5. **Skill.** Claude Fable 5.2 wrote [`SKILL.md`](science-of-evals/SKILL.md) from the reference files, using the `/skill-creator` skill.
 
 The prompts for the LLM steps are in [`pipeline/prompts/`](pipeline/prompts/).
 
