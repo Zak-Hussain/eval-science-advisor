@@ -4,7 +4,7 @@
 
 Eval Science Advisor is an agent skill. It is meant to help you design, audit and interpret AI evaluations, using the research on measurement in AI evaluation. Its advice is intended to cover seven areas: constructs, validity, elicitation, scoring, reliability, measurement models and generalisation. The skill instructs the agent to cite the papers each piece of advice draws on.
 
- It follows the open [Agent Skills](https://agentskills.io/home) standard, so it should work with any compatible agent, whichever model provider you use.
+It follows the open [Agent Skills](https://agentskills.io/home) standard, so it should work with any compatible agent, whichever model provider you use.
 
 **Status:** early development (yet to be evaluated!). 
 
@@ -49,13 +49,13 @@ The skill is distilled from a curated set of papers:
 The prompts for the LLM steps are in [`pipeline/prompts/`](pipeline/prompts/).
 
 
-## Next steps: 
+## Next steps 
 
 1. Reconsider reference categories.
 2. Expand [`pipeline/fetch_papers.py`](pipeline/fetch_papers.py) to non-arXiv, licence-permitting papers. Update `evaluation/plagarism_check.py` to include additional sources in check.  
-2. Expand [`sources/registry.yaml`](sources/registry.yaml), make the search more systematic. 
-3. Use a more capable model for the pdf -> notes distillation. 
-4. Evaluate! 
+3. Expand [`sources/registry.yaml`](sources/registry.yaml), make the search more systematic. 
+4. Use a more capable model for the pdf -> notes distillation. 
+5. Evaluate! 
 
 
 ## License
