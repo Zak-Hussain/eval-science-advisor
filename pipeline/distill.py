@@ -135,6 +135,7 @@ def make_skill() -> None:
 
     TODO: read every file in references/, fill the "skill_md" prompt, ask the model, write the draft.
     """
+    pass
 
 
 # --- Run ----------------------------------------------------------------------
